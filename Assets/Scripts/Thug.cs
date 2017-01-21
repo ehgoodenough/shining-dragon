@@ -39,10 +39,12 @@ public class Thug : MonoBehaviour {
         if(this.transform.position.x <= this.hero.transform.position.x + this.attackDistance) {
             this.transform.position = new Vector2(this.hero.transform.position.x + this.attackDistance, this.transform.position.y);
             this.state = "attacking";
+            this.hero.beStunned();
         }
     }
-    
+
     private void Attacking() {
+
         if(Input.GetButtonDown("Action")) {
             this.hero.beAttacked();
         }
