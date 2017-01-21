@@ -6,7 +6,13 @@ using UnityEngine.UI;
 public class Hero : MonoBehaviour {
     
     private float health = 100f;
-	
+	private string state = "unset";
+	private GameObject manager;
+
+	void Start () {
+		//manager = this.transform.parent;
+	}
+
 	void Update() {
 		// ..?!
 	}
@@ -16,4 +22,8 @@ public class Hero : MonoBehaviour {
         
         GameObject.Find("Health").GetComponent<Text>().text = "HP: " + this.health;
     }
+
+	public void punch() {
+		
+	}
 }

@@ -12,9 +12,11 @@ public class Thug : MonoBehaviour {
     private const float HERO_POSITION = -6.25f;
 
 	private SceneManager manager;
+	private Hero hero;
     
 	private void Start() {
 		this.manager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
+		this.hero = manager.getHero();
 	}
 
     private void Update() {
@@ -42,7 +44,7 @@ public class Thug : MonoBehaviour {
     
     private void Attacking() {
         if(Input.GetButtonDown("Action")) {
-            GameObject.Find("Hero").GetComponent<Hero>().beAttacked();
+			this.hero.beAttacked();
             hits += 1;
             if(hits >= 3) {
                 this.Die();
