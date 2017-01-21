@@ -21,6 +21,7 @@ public class HealthBar : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         StartingX = (int)transform.position.x;
+        LastWidth = OriginalWidth;
         _RectTransform = GetComponent<RectTransform>();
     }
 
@@ -36,15 +37,10 @@ public class HealthBar : MonoBehaviour {
     {
         float percScale = health / (float)maxHealth;
 
-        var newWidth = Mathf.RoundToInt(OriginalWidth * percScale);
+        var newWidth = Mathf.FloorToInt(OriginalWidth * percScale);
         var lossOfWidth = OriginalWidth - newWidth;
 
-        if(lossOfWidth % 2 != 0)
-        {
-           // return;
-        }
-
-        var leftShift = (int)(lossOfWidth / 2);
+        var leftShift = Mathf.CeilToInt(lossOfWidth / 2.0f);
         transform.position = new Vector3(StartingX - leftShift, transform.position.y, transform.position.z);
         _RectTransform.sizeDelta = new Vector2(newWidth, _RectTransform.sizeDelta.y);
 
