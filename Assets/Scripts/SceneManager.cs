@@ -25,15 +25,14 @@ public class SceneManager : MonoBehaviour {
 	}
 
 	public Thug createThug() {
-		GameObject nextThug = Object.Instantiate(Thug, new Vector2(12f, 1.75f), Quaternion.identity);
-		nextThug.name = "Thug" + Random.Range(100, 999);
-        this.thug = nextThug.GetComponent<Thug>();
+		this.thug = Object.Instantiate(Thug, new Vector2(12f, 1.75f), Quaternion.identity).GetComponent<Thug>();
+		this.thug.gameObject.name = "Thug" + Random.Range(100, 999);
 		return this.thug;
 	}
 
-	public Hero createHero(){
-		GameObject heroObject = Instantiate(Hero, new Vector2(-7.5f, 1.75f), Quaternion.identity);
-        this.hero = heroObject.GetComponent<Hero>();
+	public Hero createHero() {
+		this.hero = Instantiate(Hero, new Vector2(-7.5f, 1.75f), Quaternion.identity).GetComponent<Hero>();
+        this.hero.gameObject.name = "Hero";
 		return this.hero;
 	}
 
