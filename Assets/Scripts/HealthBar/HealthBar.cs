@@ -46,21 +46,28 @@ public class HealthBar : MonoBehaviour {
 
         if(newWidth < LastWidth)
         {
-            for(int offset = newWidth + 1; offset <= LastWidth; offset++)
-            {
-                var x = StartingX - (OriginalWidth / 2) + offset - 1;
-                SpawnGlowEffect(new Vector3(x, transform.position.y, 0));
-            }
+            var shift = StartingX - (OriginalWidth / 2);
+            var leftEdge = shift + newWidth;
+            var rightEdge = shift + LastWidth;
+            var totalWidth = rightEdge - leftEdge + 1;
+
+            var subRightShift = Mathf.CeilToInt(totalWidth / 2.0f);
+
+            Debug.Log($"left edge = {leftEdge}, right edge = {rightEdge}, totalWidth = {totalWidth}; subRightShift = {subRightShift}");
+            SpawnGlowEffect(new Vector3(leftEdge + subRightShift, transform.position.y, 0), totalWidth);
         }
 
         LastWidth = newWidth;
     }
 
-    private void SpawnGlowEffect(Vector3 position)
+    private void SpawnGlowEffect(Vector3 position, int width)
     {
         var glowEffect = Instantiate(HPBarGlowEffectPreFab, position, Quaternion.identity);
         glowEffect.name = $"Glow Effect {position.x}";
         glowEffect.transform.SetParent(HealthBarHolder.transform, true);
+
+        var rectTrans = glowEffect.GetComponent<RectTransform>();
+        rectTrans.sizeDelta = new Vector2(width, rectTrans.sizeDelta.y);
     }
 
     public void UpdateWidth (int health, int maxHealth)
