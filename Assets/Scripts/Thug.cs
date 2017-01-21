@@ -14,7 +14,7 @@ public class Thug : MonoBehaviour {
 	private SceneManager manager;
     
 	private void Start() {
-		manager = this.transform.parent.GetComponent<SceneManager>();
+		this.manager = GameObject.find("SceneManager").GetComponent<SceneManager>();
 	}
 
     private void Update() {
