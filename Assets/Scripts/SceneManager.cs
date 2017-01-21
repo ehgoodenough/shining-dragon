@@ -13,8 +13,8 @@ public class SceneManager : MonoBehaviour {
     public HealthBar healthbar;
     
 	void Awake () {
-        this.Hero = Resources.Load("Hero") as GameObject;
-        this.Thug = Resources.Load("Thug") as GameObject;
+        this.Hero = Resources.Load("MonkHero") as GameObject;
+        this.Thug = Resources.Load("OniThug") as GameObject;
         
 		this.createHero();
 		this.createThug();

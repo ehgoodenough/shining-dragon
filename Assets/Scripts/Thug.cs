@@ -16,7 +16,12 @@ public class Thug : MonoBehaviour {
 	private void Start() {
 		this.manager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
 		this.hero = manager.getHero();
-	}
+
+        // set above the ground
+        Vector3 position = transform.position;
+        position.y = 2f;
+        transform.position = position;
+    }
 
     private void Update() {
         if(this.state == "moving") {
