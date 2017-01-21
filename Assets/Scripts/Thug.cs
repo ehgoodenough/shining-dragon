@@ -36,11 +36,13 @@ public class Thug : MonoBehaviour {
         this.transform.Translate(movement);
         
         if(this.transform.position.x <= this.hero.transform.position.x + this.hero.transform.localScale.x) {
+			this.hero.beStunned ();
             this.state = "attacking";
         }
     }
-    
+
     private void Attacking() {
+
         if(Input.GetButtonDown("Action")) {
             this.hero.beAttacked();
             hits += 1;
