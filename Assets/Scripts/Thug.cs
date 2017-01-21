@@ -5,10 +5,16 @@ using UnityEngine;
 public class Thug : MonoBehaviour {
 
     private float speed = 0.25f;
-    private const float HERO_POSITION = -4.5f;
+    private string state = "moving";
+    
+    private const float HERO_POSITION = -6.25f;
     
     private void Update() {
-        this.Move();
+        if(this.state == "moving") {
+            this.Move();
+        } else if(this.state == "attacking") {
+            this.Attack();
+        }
     }
 
     private void Move() {
@@ -22,7 +28,14 @@ public class Thug : MonoBehaviour {
         this.transform.Translate(movement);
         
         if(this.transform.position.x <= HERO_POSITION) {
+            // this.state = "attacking";
             this.Die();
+        }
+    }
+    
+    private void Attack() {
+        if(Input.GetButtonDown("Action")) {
+            Debug.Log("!!");
         }
     }
     
