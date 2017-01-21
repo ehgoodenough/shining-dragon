@@ -19,13 +19,13 @@ public class Thug : MonoBehaviour {
 
     private void Update() {
         if(this.state == "moving") {
-            this.Move();
+            this.Moving();
         } else if(this.state == "attacking") {
-            this.Attack();
+            this.Attacking();
         }
     }
 
-    private void Move() {
+    private void Moving() {
         // Normalize the delta.
         float delta = Time.deltaTime / (1f / 60f);
         
@@ -40,8 +40,9 @@ public class Thug : MonoBehaviour {
         }
     }
     
-    private void Attack() {
+    private void Attacking() {
         if(Input.GetButtonDown("Action")) {
+            GameObject.Find("Hero").GetComponent<Hero>().beAttacked();
             hits += 1;
             if(hits >= 3) {
                 this.Die();
