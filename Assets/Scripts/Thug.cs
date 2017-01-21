@@ -7,7 +7,6 @@ public class Thug : MonoBehaviour {
 
     private float speed = 0.25f;
     private string state = "moving";
-    private int hits = 0;
     
 	private SceneManager manager;
 	private Hero hero;
@@ -43,7 +42,6 @@ public class Thug : MonoBehaviour {
     private void Attacking() {
         if(Input.GetButtonDown("Action")) {
             this.hero.beAttacked();
-            hits += 1;
         }
     }
     
