@@ -7,7 +7,6 @@ public class Thug : MonoBehaviour {
 
     private float speed = 0.25f;
     private string state = "moving";
-    private int hits = 0;
     
 	private SceneManager manager;
 	private Hero hero;
@@ -45,17 +44,23 @@ public class Thug : MonoBehaviour {
 
         if(Input.GetButtonDown("Action")) {
             this.hero.beAttacked();
-            hits += 1;
         }
     }
     
 	public void tryToDie() {
-		this.Die ();
+		this.beAttacked();
 	}
 
-    private void Die() {
-		manager.handleThugDeath();
+    private void beAttacked() {
+        // The thugs are so weak, they
+        // are killed in just in one hit!!
+		manager.destroyThug();
         
-        Object.Destroy(this.gameObject);
+        // Create a new thug to
+        // replace this thug.
+        manager.createThug();
+        
+        // TODO: Don't destroy the thug, but instead
+        // send it flying and sprawling in a heep.
     }
 }

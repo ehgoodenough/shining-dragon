@@ -3,21 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SceneManager : MonoBehaviour {
-	//Declare prefabs (for assigning in inspector)
-	public GameObject Hero;
-	public GameObject Thug;
+	// Declare prefabs (for assigning in inspector)
+	private GameObject Hero;
+	private GameObject Thug;
 
-	//Declare the hero in our scene
+	// Declare the entities in our scene
 	private Thug thug;
 	private Hero hero;
+    public HealthBar healthbar;
     
 	void Awake () {
-		hero = this.createHero ();
-		thug = this.createThug();
-	}
-
-	public void handleThugDeath() {
-		thug = this.createThug();
+        this.Hero = Resources.Load("Hero") as GameObject;
+        this.Thug = Resources.Load("Thug") as GameObject;
+        
+		this.createHero();
+		this.createThug();
+        
+        if(GameObject.Find("HealthBar")) {
+            this.healthbar = GameObject.Find("HealthBar").GetComponent<HealthBar>();
+        }
 	}
 
 	public Hero getHero() {
@@ -28,14 +32,19 @@ public class SceneManager : MonoBehaviour {
 		return thug;
 	}
 
-	private Thug createThug() {
-		GameObject nextThug = Object.Instantiate(Thug, new Vector2(12f, 1.75f), Quaternion.identity);
-		nextThug.name = "Thug" + Random.Range(100, 999);
-		return nextThug.GetComponent<Thug>();
+	public Thug createThug() {
+		this.thug = Object.Instantiate(Thug, new Vector2(12f, 1.75f), Quaternion.identity).GetComponent<Thug>();
+		this.thug.gameObject.name = "Thug" + Random.Range(100, 999);
+		return this.thug;
 	}
 
-	private Hero createHero(){
-		GameObject heroObject = Instantiate(Hero, new Vector2(-7.5f, 1.75f), Quaternion.identity);
-		return heroObject.GetComponent<Hero>();
+	public Hero createHero() {
+		this.hero = Instantiate(Hero, new Vector2(-7.5f, 1.75f), Quaternion.identity).GetComponent<Hero>();
+        this.hero.gameObject.name = "Hero";
+		return this.hero;
+	}
+
+	public void destroyThug() {
+        Object.Destroy(this.thug.gameObject);
 	}
 }
