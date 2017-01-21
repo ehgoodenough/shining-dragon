@@ -51,12 +51,16 @@ public class Thug : MonoBehaviour {
     }
     
 	public void tryToDie() {
-		this.Die ();
+		this.beAttacked();
 	}
 
-    private void Die() {
-		manager.handleThugDeath();
+    private void beAttacked() {
+        // The thugs are so weak, they
+        // are killed in just in one hit!!
+		manager.destroyThug();
         
-        Object.Destroy(this.gameObject);
+        // Create a new thug to
+        // replace this thug.
+        manager.createThug();
     }
 }
