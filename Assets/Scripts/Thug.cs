@@ -51,7 +51,7 @@ public class Thug : MonoBehaviour {
     }
     
     private void Die() {
-		manager.handleThugDeath ();
+		manager.handleThugDeath();
         
         Object.Destroy(this.gameObject);
     }
