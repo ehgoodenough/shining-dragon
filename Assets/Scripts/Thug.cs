@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Thug : MonoBehaviour {
 
     private float speed = 0.25f;
     private string state = "moving";
+    private int hits = 0;
     
     private const float HERO_POSITION = -6.25f;
     
@@ -28,14 +30,16 @@ public class Thug : MonoBehaviour {
         this.transform.Translate(movement);
         
         if(this.transform.position.x <= HERO_POSITION) {
-            // this.state = "attacking";
-            this.Die();
+            this.state = "attacking";
         }
     }
     
     private void Attack() {
         if(Input.GetButtonDown("Action")) {
-            Debug.Log("!!");
+            hits += 1;
+            if(hits >= 3) {
+                this.Die();
+            }
         }
     }
     
