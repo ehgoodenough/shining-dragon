@@ -8,32 +8,29 @@ public class SceneManager : MonoBehaviour {
 	public GameObject Thug;
 
 	//Declare the hero in our scene
-	private ArrayList thugs;
+	private Thug thug;
 	private Hero hero;
     
 	void Awake () {
-		thugs = new ArrayList ();
-
 		hero = this.createHero ();
-		this.createThug();
+		thug = this.createThug();
 	}
 
 	public void handleThugDeath() {
-		this.createThug();
+		thug = this.createThug();
 	}
 
 	public Hero getHero() {
 		return hero;
 	}
 
-	public ArrayList getThugs() {
-		return thugs;
+	public Thug getThug() {
+		return thug;
 	}
 
 	private Thug createThug() {
 		GameObject nextThug = Object.Instantiate(Thug, new Vector2(12f, 1.75f), Quaternion.identity);
 		nextThug.name = "Thug" + Random.Range(100, 999);
-		thugs.Add(nextThug);
 		return nextThug.GetComponent<Thug>();
 	}
 

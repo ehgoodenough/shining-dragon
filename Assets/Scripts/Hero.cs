@@ -26,6 +26,7 @@ public class Hero : MonoBehaviour {
     }
 
 	public void punch() {
-		
+		Thug thug = manager.getThug ();
+		thug.tryToDie ();
 	}
 }

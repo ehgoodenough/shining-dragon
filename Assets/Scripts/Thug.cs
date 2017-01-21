@@ -45,11 +45,15 @@ public class Thug : MonoBehaviour {
             this.hero.beAttacked();
             hits += 1;
             if(hits >= 3) {
-                this.Die();
+				hero.punch ();
             }
         }
     }
     
+	public void tryToDie() {
+		this.Die ();
+	}
+
     private void Die() {
 		manager.handleThugDeath();
         
