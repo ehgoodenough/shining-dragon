@@ -41,7 +41,7 @@ public class HealthBar : MonoBehaviour {
 
         if(lossOfWidth % 2 != 0)
         {
-            return;
+           // return;
         }
 
         var leftShift = (int)(lossOfWidth / 2);
