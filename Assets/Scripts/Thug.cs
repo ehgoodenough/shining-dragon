@@ -9,12 +9,12 @@ public class Thug : MonoBehaviour {
     private string state = "moving";
     private int hits = 0;
     
-    private const float HERO_POSITION = -6.25f;
-
+    private Hero hero;
 	private SceneManager manager;
     
 	private void Start() {
 		this.manager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
+        this.hero = GameObject.Find("Hero").GetComponent<Hero>();
 	}
 
     private void Update() {
@@ -35,14 +35,14 @@ public class Thug : MonoBehaviour {
         // Execute the movement.
         this.transform.Translate(movement);
         
-        if(this.transform.position.x <= HERO_POSITION) {
+        if(this.transform.position.x <= this.hero.transform.position.x + this.hero.transform.localScale.x) {
             this.state = "attacking";
         }
     }
     
     private void Attacking() {
         if(Input.GetButtonDown("Action")) {
-            GameObject.Find("Hero").GetComponent<Hero>().beAttacked();
+            this.hero.beAttacked();
             hits += 1;
             if(hits >= 3) {
                 this.Die();
