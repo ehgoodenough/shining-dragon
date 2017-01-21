@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class Hero : MonoBehaviour {
     
-    private int maxhealth = 10;
-    private int health = 10;
+    private int maxhealth = 50;
+    private int health = 50;
     
 	private string state = "unset";
 	private SceneManager manager;
