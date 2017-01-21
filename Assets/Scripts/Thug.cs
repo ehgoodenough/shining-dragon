@@ -9,12 +9,12 @@ public class Thug : MonoBehaviour {
     private string state = "moving";
     private int hits = 0;
     
-    private Hero hero;
 	private SceneManager manager;
+	private Hero hero;
     
 	private void Start() {
 		this.manager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
-        this.hero = GameObject.Find("Hero").GetComponent<Hero>();
+		this.hero = manager.getHero();
 	}
 
     private void Update() {

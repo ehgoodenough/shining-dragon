@@ -7,7 +7,14 @@ public class Hero : MonoBehaviour {
     
     private int maxhealth = 100;
     private int health = 100;
-	
+    
+	private string state = "unset";
+	private SceneManager manager;
+
+	void Start () {
+		this.manager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
+	}
+    
 	void Update() {
 		// ..?!
 	}
@@ -15,7 +22,10 @@ public class Hero : MonoBehaviour {
     public void beAttacked() {
         health -= 1;
         
-        // GameObject.Find("Health").GetComponent<Text>().text = "HP: " + this.health;
         GameObject.Find("HealthBar").GetComponent<HealthBar>().UpdateWidth(this.health, this.maxhealth);
     }
+
+	public void punch() {
+		
+	}
 }

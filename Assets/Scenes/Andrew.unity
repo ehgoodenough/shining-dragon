@@ -193,6 +193,16 @@ Prefab:
       propertyPath: DebugHealthBar
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 224908528550222014, guid: 8a52a4c8754646e439a81d04171b00a3,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114233612106835376, guid: 8a52a4c8754646e439a81d04171b00a3,
+        type: 2}
+      propertyPath: DebugHealthBar
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8a52a4c8754646e439a81d04171b00a3, type: 2}
   m_IsPrefabParent: 0
@@ -384,6 +394,18 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114017551495894254, guid: 3405384dc1c0f4c07865c4d29a92da1c,
+        type: 2}
+      propertyPath: Hero
+      value: 
+      objectReference: {fileID: 1000203977619838, guid: 337ce02ef3cc0471ebf177f817c59844,
+        type: 2}
+    - target: {fileID: 114017551495894254, guid: 3405384dc1c0f4c07865c4d29a92da1c,
+        type: 2}
+      propertyPath: Thug
+      value: 
+      objectReference: {fileID: 1790646938287676, guid: d2dc86db6ed2043ce83b042042c09def,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3405384dc1c0f4c07865c4d29a92da1c, type: 2}
   m_IsPrefabParent: 0
