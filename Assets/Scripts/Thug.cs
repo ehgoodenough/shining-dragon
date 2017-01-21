@@ -7,7 +7,8 @@ public class Thug : MonoBehaviour {
 
     private float speed = 0.25f;
     private string state = "moving";
-    private int hits = 0;
+    
+    private float attackDistance = 1.23f;
     
 	private SceneManager manager;
 	private Hero hero;
@@ -35,24 +36,34 @@ public class Thug : MonoBehaviour {
         // Execute the movement.
         this.transform.Translate(movement);
         
-        if(this.transform.position.x <= this.hero.transform.position.x + this.hero.transform.localScale.x) {
+        if(this.transform.position.x <= this.hero.transform.position.x + this.attackDistance) {
+            this.transform.position = new Vector2(this.hero.transform.position.x + this.attackDistance, this.transform.position.y);
             this.state = "attacking";
+            this.hero.beStunned();
         }
     }
-    
+
     private void Attacking() {
+
         if(Input.GetButtonDown("Action")) {
             this.hero.beAttacked();
-            hits += 1;
-            if(hits >= 3) {
-                this.Die();
-            }
         }
     }
     
-    private void Die() {
-		manager.handleThugDeath();
+	public void tryToDie() {
+		this.beAttacked();
+	}
+
+    private void beAttacked() {
+        // The thugs are so weak, they
+        // are killed in just in one hit!!
+		manager.destroyThug();
         
-        Object.Destroy(this.gameObject);
+        // Create a new thug to
+        // replace this thug.
+        manager.createThug();
+        
+        // TODO: Don't destroy the thug, but instead
+        // send it flying and sprawling in a heep.
     }
 }
