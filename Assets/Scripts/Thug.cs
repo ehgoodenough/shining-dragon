@@ -44,9 +44,6 @@ public class Thug : MonoBehaviour {
         if(Input.GetButtonDown("Action")) {
             this.hero.beAttacked();
             hits += 1;
-            if(hits >= 3) {
-				hero.punch ();
-            }
         }
     }
     

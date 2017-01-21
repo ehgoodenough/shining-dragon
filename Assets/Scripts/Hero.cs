@@ -11,12 +11,22 @@ public class Hero : MonoBehaviour {
 	private string state = "unset";
 	private SceneManager manager;
 
+	float timeBetweenPunches;
+	float timeSincePunch;
+
 	void Start () {
 		this.manager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
+		timeBetweenPunches = 3;
+		timeSincePunch = 0;
 	}
     
 	void Update() {
 		// ..?!
+		timeSincePunch += Time.deltaTime;
+		if (timeSincePunch > timeBetweenPunches) {
+			
+			this.punch ();
+		}
 	}
     
     public void beAttacked() {
@@ -28,5 +38,7 @@ public class Hero : MonoBehaviour {
 	public void punch() {
 		Thug thug = manager.getThug ();
 		thug.tryToDie ();
+		timeSincePunch = 0;
+		Debug.Log ("punching");
 	}
 }
