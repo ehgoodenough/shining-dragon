@@ -59,5 +59,8 @@ public class Thug : MonoBehaviour {
         // Create a new thug to
         // replace this thug.
         manager.createThug();
+        
+        // TODO: Don't destroy the thug, but instead
+        // send it flying and sprawling in a heep.
     }
 }
