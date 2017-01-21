@@ -8,6 +8,8 @@ public class Thug : MonoBehaviour {
     private float speed = 0.25f;
     private string state = "moving";
     
+    private float attackDistance = 1.23f;
+    
 	private SceneManager manager;
 	private Hero hero;
     
@@ -34,9 +36,10 @@ public class Thug : MonoBehaviour {
         // Execute the movement.
         this.transform.Translate(movement);
         
-        if(this.transform.position.x <= this.hero.transform.position.x + this.hero.transform.localScale.x) {
-			this.hero.beStunned ();
+        if(this.transform.position.x <= this.hero.transform.position.x + this.attackDistance) {
+            this.transform.position = new Vector2(this.hero.transform.position.x + this.attackDistance, this.transform.position.y);
             this.state = "attacking";
+            this.hero.beStunned();
         }
     }
 

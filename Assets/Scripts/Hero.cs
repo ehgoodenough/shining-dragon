@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class Hero : MonoBehaviour {
     
-    private int maxhealth = 100;
-    private int health = 100;
+    private int maxhealth = 10;
+    private int health = 10;
     
 	private string state = "unset";
 	private SceneManager manager;
@@ -67,10 +67,13 @@ public class Hero : MonoBehaviour {
 	}
 
     public void beAttacked() {
-        health -= 1;
+        this.health -= 1;
+        if(this.health <= 0) {
+            Debug.Log("You Win!!");
+        }
         
-        if(manager.healthbar != null) {
-            manager.healthbar.UpdateWidth(this.health, this.maxhealth);
+        if(this.manager.healthbar != null) {
+            this.manager.healthbar.UpdateWidth(this.health, this.maxhealth);
         }
     }
 
