@@ -12,13 +12,12 @@ public class Hero : MonoBehaviour {
 	private SceneManager manager;
 
 	float timeSinceReady;
-	float timeSincePunch;
+	float timeInEndlag;
 	float timeSinceStunned;
 
 	float readyDuration;
 	float endlagDuration;
 	float stunDuration;
-	bool hasPunchedSinceStunned;
 
 	void Start () {
 		this.manager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
@@ -28,11 +27,9 @@ public class Hero : MonoBehaviour {
 		endlagDuration = 0.5f;
 		stunDuration = 1;
 		timeSinceStunned = 0;
-		hasPunchedSinceStunned = true;;
 	}
     
 	void Update() {
-		timeSincePunch += Time.deltaTime;
 		if (this.state == "stunned") {
 			timeSinceStunned += Time.deltaTime;
 			if (timeSinceStunned >= stunDuration) {
@@ -49,15 +46,15 @@ public class Hero : MonoBehaviour {
 		}
 
 		if (this.state == "endlag") {
-			if (timeSincePunch >= endlagDuration) {
+			timeInEndlag += Time.deltaTime;
+
+			if (timeInEndlag >= endlagDuration) {
 				this.state = "walking";
 			}
 		}
 
 		if (this.state == "walking") {
-			this.timeSincePunch += Time.deltaTime;
 			this.transform.Translate (new Vector2 (0.01f, 0));
-			timeSincePunch += Time.deltaTime;
 		}
 
 		//Debug.Log (this.state);
@@ -81,6 +78,6 @@ public class Hero : MonoBehaviour {
 		this.state = "endlag";
 		Thug thug = manager.getThug ();
 		thug.tryToDie ();
-		timeSincePunch = 0;
+		timeInEndlag = 0;
 	}
 }
