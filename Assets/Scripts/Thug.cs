@@ -10,7 +10,13 @@ public class Thug : MonoBehaviour {
     private int hits = 0;
     
     private const float HERO_POSITION = -6.25f;
+
+	private SceneManager manager;
     
+	private void Start() {
+		manager = this.transform.parent.GetComponent<SceneManager>();
+	}
+
     private void Update() {
         if(this.state == "moving") {
             this.Move();
@@ -44,8 +50,7 @@ public class Thug : MonoBehaviour {
     }
     
     private void Die() {
-        GameObject nextThug = Object.Instantiate(this.gameObject, new Vector2(12f, 1.75f), Quaternion.identity);
-        nextThug.name = "Thug" + Random.Range(100, 999);
+		manager.handleThugDeath ();
         
         Object.Destroy(this.gameObject);
     }
