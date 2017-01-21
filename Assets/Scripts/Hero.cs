@@ -31,7 +31,9 @@ public class Hero : MonoBehaviour {
     public void beAttacked() {
         health -= 1;
         
-        GameObject.Find("HealthBar").GetComponent<HealthBar>().UpdateWidth(this.health, this.maxhealth);
+        if(manager.healthbar != null) {
+            manager.healthbar.UpdateWidth(this.health, this.maxhealth);
+        }
     }
 
 	public void punch() {

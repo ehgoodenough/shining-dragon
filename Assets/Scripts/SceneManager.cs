@@ -10,6 +10,7 @@ public class SceneManager : MonoBehaviour {
 	// Declare the entities in our scene
 	private Thug thug;
 	private Hero hero;
+    public HealthBar healthbar;
     
 	void Awake () {
         this.Hero = Resources.Load("Hero") as GameObject;
@@ -17,6 +18,10 @@ public class SceneManager : MonoBehaviour {
         
 		this.createHero();
 		this.createThug();
+        
+        if(GameObject.Find("HealthBar")) {
+            this.healthbar = GameObject.Find("HealthBar").GetComponent<HealthBar>();
+        }
 	}
 
 	public Hero getHero() {
