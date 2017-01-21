@@ -52,8 +52,7 @@ public class HealthBar : MonoBehaviour {
             var totalWidth = rightEdge - leftEdge + 1;
 
             var subRightShift = Mathf.CeilToInt(totalWidth / 2.0f);
-
-            Debug.Log($"left edge = {leftEdge}, right edge = {rightEdge}, totalWidth = {totalWidth}; subRightShift = {subRightShift}");
+            
             SpawnGlowEffect(new Vector3(leftEdge + subRightShift, transform.position.y, 0), totalWidth);
         }
 
