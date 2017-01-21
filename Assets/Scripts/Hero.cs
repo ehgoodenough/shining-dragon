@@ -21,7 +21,6 @@ public class Hero : MonoBehaviour {
 	}
     
 	void Update() {
-		// ..?!
 		timeSincePunch += Time.deltaTime;
 		if (timeSincePunch > timeBetweenPunches) {
 			
