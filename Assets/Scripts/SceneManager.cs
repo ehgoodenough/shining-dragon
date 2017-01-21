@@ -30,11 +30,11 @@ public class SceneManager : MonoBehaviour {
 		return thugs;
 	}
 
-	private GameObject createThug() {
+	private Thug createThug() {
 		GameObject nextThug = Object.Instantiate(Thug, new Vector2(12f, 1.75f), Quaternion.identity);
 		nextThug.name = "Thug" + Random.Range(100, 999);
 		thugs.Add(nextThug);
-		return nextThug;
+		return nextThug.GetComponent<Thug>();
 	}
 
 	private Hero createHero(){
