@@ -54,7 +54,11 @@ public class Hero : MonoBehaviour {
 		}
 
 		if (this.state == "walking") {
-			this.transform.Translate (new Vector2 (0.01f, 0));
+			this.transform.Translate(new Vector2 (0.01f, 0));
+            
+            if(this.transform.position.x >= 9) {
+                Debug.Log("You Lose!!");
+            }
 		}
 
 		//Debug.Log (this.state);
