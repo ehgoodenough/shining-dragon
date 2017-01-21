@@ -63,7 +63,6 @@ public class Hero : MonoBehaviour {
 	public void beStunned() {
 		this.state = "stunned";
 		this.timeSinceStunned = 0;
-		hasPunchedSinceStunned = false;
 	}
 
     public void beAttacked() {
