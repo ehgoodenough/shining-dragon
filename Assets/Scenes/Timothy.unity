@@ -151,12 +151,12 @@ Prefab:
     - target: {fileID: 224071053692844886, guid: 222afa50b1146e84bad61ae4c989548d,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 250
+      value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 224071053692844886, guid: 222afa50b1146e84bad61ae4c989548d,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 22
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 224071053692844886, guid: 222afa50b1146e84bad61ae4c989548d,
         type: 2}

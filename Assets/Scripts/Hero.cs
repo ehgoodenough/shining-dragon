@@ -11,7 +11,9 @@ public class Hero : MonoBehaviour {
 	private string state = "unset";
 	private SceneManager manager;
 
-	float timeSinceReady;
+    private Animator animator;
+
+    float timeSinceReady;
 	float timeInEndlag;
 	float timeSinceStunned;
 
@@ -27,6 +29,18 @@ public class Hero : MonoBehaviour {
 		endlagDuration = 0.5f;
 		stunDuration = 1;
 		timeSinceStunned = 0;
+
+        // rotate the character to face the enemy
+        Vector3 vector = transform.localScale;
+        vector.x *= -1;
+        transform.localScale = vector;
+
+        // set above the ground
+        Vector3 position = transform.position;
+        position.y = 2.15f;
+        transform.position = position;
+
+        animator = GetComponent<Animator>();
 	}
     
 	void Update() {
@@ -34,7 +48,9 @@ public class Hero : MonoBehaviour {
 			timeSinceStunned += Time.deltaTime;
 			if (timeSinceStunned >= stunDuration) {
 				this.state = "ready";
-				timeSinceReady = 0;
+
+                animator.Play("Attack");
+                timeSinceReady = 0;
 			}
 		}
 
