@@ -30,9 +30,15 @@ public class Hero : MonoBehaviour {
 		stunDuration = 1;
 		timeSinceStunned = 0;
 
+        // rotate the character to face the enemy
         Vector3 vector = transform.localScale;
         vector.x *= -1;
         transform.localScale = vector;
+
+        // set above the ground
+        Vector3 position = transform.position;
+        position.y = 2.15f;
+        transform.position = position;
 
         animator = GetComponent<Animator>();
 	}
