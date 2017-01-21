@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class SceneManager : MonoBehaviour {
 	// Declare prefabs (for assigning in inspector)
-	public GameObject Hero;
-	public GameObject Thug;
+	private GameObject Hero;
+	private GameObject Thug;
 
 	// Declare the entities in our scene
 	private Thug thug;
 	private Hero hero;
     
 	void Awake () {
+        this.Hero = Resources.Load("Hero") as GameObject;
+        this.Thug = Resources.Load("Thug") as GameObject;
+        
 		this.createHero();
 		this.createThug();
 	}
