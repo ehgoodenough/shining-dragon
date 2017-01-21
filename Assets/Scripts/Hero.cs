@@ -5,14 +5,16 @@ using UnityEngine.UI;
 
 public class Hero : MonoBehaviour {
     
-    private float health = 100f;
+    private int maxhealth = 100;
+    private int health = 100;
+    
 	private string state = "unset";
-	private GameObject manager;
+	private SceneManager manager;
 
 	void Start () {
-		//manager = this.transform.parent;
+		this.manager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
 	}
-
+    
 	void Update() {
 		// ..?!
 	}
@@ -20,7 +22,7 @@ public class Hero : MonoBehaviour {
     public void beAttacked() {
         health -= 1;
         
-        GameObject.Find("Health").GetComponent<Text>().text = "HP: " + this.health;
+        GameObject.Find("HealthBar").GetComponent<HealthBar>().UpdateWidth(this.health, this.maxhealth);
     }
 
 	public void punch() {

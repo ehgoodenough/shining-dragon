@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OriginalWidth: 250
-  DebugHealthBar: 1
+  DebugHealthBar: 0
   DebugForcedHealth: 50
   DebugForcedHealthMax: 100
 --- !u!114 &114781478982093548

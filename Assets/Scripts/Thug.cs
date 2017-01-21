@@ -9,8 +9,6 @@ public class Thug : MonoBehaviour {
     private string state = "moving";
     private int hits = 0;
     
-    private const float HERO_POSITION = -6.25f;
-
 	private SceneManager manager;
 	private Hero hero;
     
@@ -37,14 +35,14 @@ public class Thug : MonoBehaviour {
         // Execute the movement.
         this.transform.Translate(movement);
         
-        if(this.transform.position.x <= HERO_POSITION) {
+        if(this.transform.position.x <= this.hero.transform.position.x + this.hero.transform.localScale.x) {
             this.state = "attacking";
         }
     }
     
     private void Attacking() {
         if(Input.GetButtonDown("Action")) {
-			this.hero.beAttacked();
+            this.hero.beAttacked();
             hits += 1;
             if(hits >= 3) {
                 this.Die();
@@ -53,7 +51,7 @@ public class Thug : MonoBehaviour {
     }
     
     private void Die() {
-		manager.handleThugDeath ();
+		manager.handleThugDeath();
         
         Object.Destroy(this.gameObject);
     }

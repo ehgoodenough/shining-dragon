@@ -51,5 +51,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ef3ca0cf144740869b435396e598110, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hero: {fileID: 1000203977619838, guid: 337ce02ef3cc0471ebf177f817c59844, type: 2}
-  thug: {fileID: 1790646938287676, guid: d2dc86db6ed2043ce83b042042c09def, type: 2}
+  Hero: {fileID: 1000203977619838, guid: 337ce02ef3cc0471ebf177f817c59844, type: 2}
+  Thug: {fileID: 1790646938287676, guid: d2dc86db6ed2043ce83b042042c09def, type: 2}
