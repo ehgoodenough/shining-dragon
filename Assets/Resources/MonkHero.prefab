@@ -155,6 +155,15 @@ MonoBehaviour:
   hitSFXList:
   - {fileID: 8300000, guid: 6b933f27224c3114b98027c79a1d9561, type: 3}
   - {fileID: 8300000, guid: f0f48cb5de3e1b743a68b0e266b9b4eb, type: 3}
+  VOSFXList:
+  - {fileID: 8300000, guid: 4f7a7d9c18d1c294c97ec4847846f60b, type: 3}
+  - {fileID: 8300000, guid: 3ae3b2caf697955488b774e11e6015b1, type: 3}
+  - {fileID: 8300000, guid: ed07e2190c9875e4fb851f9ffd6b509b, type: 3}
+  - {fileID: 8300000, guid: 43708509873833149b11356cd263f625, type: 3}
+  - {fileID: 8300000, guid: f1f997620b970c84da32d0a15a9d6940, type: 3}
+  - {fileID: 8300000, guid: 0612f5e709e158948a50381b09d5879c, type: 3}
+  - {fileID: 8300000, guid: 955eb3c2de9bc1647b800979d7d737c0, type: 3}
+  - {fileID: 8300000, guid: 5cd7e083253c25841b6fca0b8f2e815a, type: 3}
   maxhealth: 72
   health: 72
 --- !u!212 &212531195439994140

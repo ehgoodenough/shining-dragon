@@ -6,7 +6,10 @@ using UnityEngine.UI;
 public class Hero : MonoBehaviour {
     public AudioClip attackSFX;
     public AudioClip[] hitSFXList = new AudioClip[2];
-    private int hitSFX = 0;
+    public AudioClip[] VOSFXList = new AudioClip[6];
+    private int VOSFX;
+
+    private int hitSFX;
     
     public int maxhealth = 50;
     public int health = 50;
@@ -144,5 +147,8 @@ public class Hero : MonoBehaviour {
         
         Time.timeScale = 1f;
         manager.tutorialMessage.text = "";
+
+        VOSFX = Random.Range(0, VOSFXList.Length);
+        source.PlayOneShot(VOSFXList[VOSFX]);
 	}
 }
