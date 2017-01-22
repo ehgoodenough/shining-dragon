@@ -9,6 +9,7 @@ public class Thug : MonoBehaviour {
     private AudioSource source;
     private Animator animator;
     private Rigidbody2D body;
+    private SpriteRenderer render;
 
     private float speed = 0.05f;
     private string state = "moving";
@@ -33,6 +34,7 @@ public class Thug : MonoBehaviour {
     
     private float timeSinceDead = 0f;
 	private float timeSinceAlive = 0f;
+    
 
 	private void Start() {
 		this.manager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
@@ -50,12 +52,9 @@ public class Thug : MonoBehaviour {
 
         animator = GetComponent<Animator>();
         source = GetComponent<AudioSource>();
-        
-        // body = GetComponent<Rigidbody2D>();
-        // body.isKinematic = true;
-        // body.detectCollisions = false;
 
 		sweetSpotIndicator.SetActive (false);
+        render = GetComponent<SpriteRenderer>();
     }
 
     private void Update() {
@@ -83,7 +82,6 @@ public class Thug : MonoBehaviour {
 		if (timeSinceAlive > 0.6f) {
 			sweetSpotIndicator.SetActive (true);
 		}
-        
     }
 
     private void Moving() {
@@ -134,6 +132,7 @@ public class Thug : MonoBehaviour {
 				//Should tween nicely when we have time
 				this.transform.position = new Vector2 (this.hero.transform.position.x + heroBufferXWidth, this.transform.position.y);
 				this.state = "attacking";
+                animator.Play("Attack");
 				//Debug.Log (stunPower);
 				this.hero.beStunned (stunPower);
 				stunPower = 0;
@@ -144,7 +143,7 @@ public class Thug : MonoBehaviour {
 				this.transform.position = new Vector2 (this.hero.transform.position.x + heroBufferXWidth, this.transform.position.y);
 				if (this.state != "attacking") {
 					float tint = 0.0f;
-					this.GetComponent<SpriteRenderer> ().color = new Color (tint, tint, tint, 1);
+					render.color = new Color (tint, tint, tint, 1);
 				}
 			}
         }
@@ -179,7 +178,6 @@ public class Thug : MonoBehaviour {
         body.AddForce(new Vector2(Random.Range(4f, 6f), 5f), ForceMode2D.Impulse);
         body.AddTorque(Random.Range(-0.5f, -1f), ForceMode2D.Impulse);
         
-        SpriteRenderer render = GetComponent<SpriteRenderer>();
         render.sortingOrder -= 1;
         render.color = new Color(255, 255, 255, 1);
     }
