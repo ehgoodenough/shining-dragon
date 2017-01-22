@@ -107,11 +107,15 @@ public class Hero : MonoBehaviour {
 	}
 
     public void beAttacked() {
-        this.health -= 1;
+        this.health -= 10;
         if(this.health <= 0) {
             this.health = 0;
             manager.gameEnd(true);
-            Debug.Log("You Win!!");
+            
+            Rigidbody2D body = gameObject.AddComponent<Rigidbody2D>() as Rigidbody2D;
+            body.isKinematic = false;
+            body.AddForce(new Vector2(-6f, 5f), ForceMode2D.Impulse);
+            body.AddTorque(-1f, ForceMode2D.Impulse);
         }
         
         if(this.manager.healthbar != null) {
