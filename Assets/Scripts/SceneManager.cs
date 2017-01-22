@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SceneManager : MonoBehaviour {
 	// Declare prefabs (for assigning in inspector)
@@ -11,6 +12,7 @@ public class SceneManager : MonoBehaviour {
 	private Thug thug;
 	private Hero hero;
     public HealthBar healthbar;
+    public Text endMessage;
     
 	void Awake () {
         this.Hero = Resources.Load("MonkHero") as GameObject;
@@ -22,6 +24,8 @@ public class SceneManager : MonoBehaviour {
         if(GameObject.Find("HealthBar")) {
             this.healthbar = GameObject.Find("HealthBar").GetComponent<HealthBar>();
         }
+
+        endMessage.text = "";
 	}
 
 	public Hero getHero() {
@@ -31,6 +35,16 @@ public class SceneManager : MonoBehaviour {
 	public Thug getThug() {
 		return thug;
 	}
+
+    public void setWin()
+    {
+        endMessage.text = "You Win!";
+    }
+
+    public void setLose()
+    {
+        endMessage.text = "You Lose!";
+    }
 
 	public Thug createThug() {
 		this.thug = Object.Instantiate(Thug, new Vector2(12f, 1.75f), Quaternion.identity).GetComponent<Thug>();

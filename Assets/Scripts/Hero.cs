@@ -72,7 +72,9 @@ public class Hero : MonoBehaviour {
 		if (this.state == "walking") {
 			this.transform.Translate(new Vector2 (0.01f, 0));
             
-            if(this.transform.position.x >= 9) {
+            if(this.transform.position.x >= 9)
+            {
+                manager.setLose();
                 Debug.Log("You Lose!!");
             }
 		}
@@ -88,6 +90,7 @@ public class Hero : MonoBehaviour {
     public void beAttacked() {
         this.health -= 1;
         if(this.health <= 0) {
+            manager.setWin();
             Debug.Log("You Win!!");
         }
         
