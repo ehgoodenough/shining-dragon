@@ -79,7 +79,7 @@ public class Thug : MonoBehaviour {
 		float sweetSpotDiff = sweetSpot - sweetSpotIndicator.transform.position.x;
 		sweetSpotIndicator.transform.Translate (new Vector3(sweetSpotDiff, 0, 0));
 
-		if (timeSinceAlive > 1) {
+		if (timeSinceAlive > 0.6f) {
 			sweetSpotIndicator.SetActive (true);
 		}
     }
@@ -120,6 +120,13 @@ public class Thug : MonoBehaviour {
 
 		//If we're close enough to the hero to jump
 		if(distanceFromHero <= attackDistance) {
+			if (distanceFromHero <= minSweetSpot) {
+				if (this.state != "attacking") {
+
+					sweetSpotIndicatorForeground.GetComponent<SpriteRenderer> ().color = new Color (1f, 0.2f, 0.2f, 1);
+				}
+			}
+
 			if (Input.GetKeyDown (KeyCode.Space) && !((this.transform.position.x + movement.x - heroBufferXWidth) <= hero.transform.position.x)) {
 				//Debug.Log ("got here");
 				//Should tween nicely when we have time
@@ -128,13 +135,6 @@ public class Thug : MonoBehaviour {
 				//Debug.Log (stunPower);
 				this.hero.beStunned (stunPower);
 				stunPower = 0;
-			}
-
-			if (distanceFromHero <= minSweetSpot) {
-				if (this.state != "attacking") {
-					
-					sweetSpotIndicatorForeground.GetComponent<SpriteRenderer> ().color = new Color (1f, 0.2f, 0.2f, 1);
-				}
 			}
 
 			//If the thug reaches the hero without pressing space
