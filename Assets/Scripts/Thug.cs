@@ -28,6 +28,8 @@ public class Thug : MonoBehaviour {
 	private float stunPower = 0;
 
 	private float heroBufferXWidth = 0.4f;
+    
+    private Rigidbody2D body;
 
 	private void Start() {
 		this.manager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
@@ -43,6 +45,8 @@ public class Thug : MonoBehaviour {
 		sweetSpotIndicatorForeground = sweetSpotIndicator.transform.FindChild ("SweetSpotIndicatorForeground").gameObject;
 
         source = GetComponent<AudioSource>();
+        
+        body = GetComponent<Rigidbody2D>();
     }
 
     private void Update() {
@@ -111,9 +115,10 @@ public class Thug : MonoBehaviour {
 			}
         }
         
-        Vector3 cameraMovement = new Vector3(0f, 0f, 0f);
-        cameraMovement.x = (this.transform.position.x - 1f - Camera.main.transform.position.x) / 16;
-        Camera.main.transform.Translate(cameraMovement);
+        // Vector3 cameraMovement = new Vector3(0f, 0f, 0f);
+        // cameraMovement.x = (this.transform.position.x - 1f - Camera.main.transform.position.x) / 16;
+        // Camera.main.transform.Translate(cameraMovement);
+        Camera.main.transform.position = transform.position;
     }
 
     private void Attacking() {
