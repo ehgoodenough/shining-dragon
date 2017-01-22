@@ -18,7 +18,7 @@ public class SceneManager : MonoBehaviour {
     
     public bool gameHasEnded = false;
     
-    public bool hasCompletedTutorial = true;
+    public bool hasCompletedTutorial = false;
 
     private string state;
 
