@@ -38,7 +38,6 @@ public class Hero : MonoBehaviour {
 		endlagDuration = 0.5f;
 		stunDuration = 1;
 		timeSinceStunned = 0;
-        hitSFX = Random.Range(0, hitSFXList.Length);
 
         // rotate the character to face the enemy
         Vector3 vector = transform.localScale;
@@ -108,6 +107,8 @@ public class Hero : MonoBehaviour {
 		this.state = "stunned";
 		this.timeSinceStunned = 0;
 		animator.Play("Block");
+
+        hitSFX = Random.Range(0, hitSFXList.Length);
         source.PlayOneShot(hitSFXList[hitSFX]);
 
         moveBackToGo = stunPower / 15;
