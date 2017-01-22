@@ -163,9 +163,11 @@ public class Thug : MonoBehaviour {
         GetComponent<CapsuleCollider2D>().isTrigger = false;
         body = gameObject.AddComponent<Rigidbody2D>() as Rigidbody2D;
         body.isKinematic = false;
-        body.AddForce(new Vector2(5f, 5f), ForceMode2D.Impulse);
-        body.AddTorque(-0.5f, ForceMode2D.Impulse);
+        body.AddForce(new Vector2(Random.Range(4f, 6f), 5f), ForceMode2D.Impulse);
+        body.AddTorque(Random.Range(-0.5f, -1f), ForceMode2D.Impulse);
         
-        // SweetSpotIndicator.SetActive(false);
+        SpriteRenderer render = GetComponent<SpriteRenderer>();
+        render.sortingOrder -= 1;
+        render.color = new Color(255, 255, 255, 1);
     }
 }
