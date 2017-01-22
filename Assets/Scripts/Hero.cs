@@ -60,7 +60,8 @@ public class Hero : MonoBehaviour {
 		//Debug.Log (this.state);
 	}
     
-	public void beStunned() {
+	public void beStunned(float stunPower) {
+		this.stunDuration = stunPower;
 		this.state = "stunned";
 		this.timeSinceStunned = 0;
 	}
