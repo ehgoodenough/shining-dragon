@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 468667f28ae7f0c49a81b31f0070cabf
-timeCreated: 1485036660
+timeCreated: 1485118653
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -9,6 +9,9 @@ TextureImporter:
     21300004: Oni_Thug_Man_2
     21300006: Oni_Thug_Man_3
     21300008: Oni_Thug_Man_4
+    21300010: Oni_Thug_Man_5
+    21300012: Oni_Thug_Man_6
+    21300014: Oni_Thug_Man_7
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -94,10 +97,10 @@ TextureImporter:
       name: Oni_Thug_Man_0
       rect:
         serializedVersion: 2
-        x: 20
-        y: 10
-        width: 20
-        height: 55
+        x: 9
+        y: 7
+        width: 38
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -107,10 +110,10 @@ TextureImporter:
       name: Oni_Thug_Man_1
       rect:
         serializedVersion: 2
-        x: 56
-        y: 24
-        width: 53
-        height: 38
+        x: 57
+        y: 6
+        width: 29
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -120,10 +123,10 @@ TextureImporter:
       name: Oni_Thug_Man_2
       rect:
         serializedVersion: 2
-        x: 118
-        y: 7
-        width: 38
-        height: 50
+        x: 98
+        y: 15
+        width: 53
+        height: 39
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -133,10 +136,10 @@ TextureImporter:
       name: Oni_Thug_Man_3
       rect:
         serializedVersion: 2
-        x: 169
-        y: 23
-        width: 53
-        height: 38
+        x: 163
+        y: 13
+        width: 49
+        height: 39
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -146,10 +149,49 @@ TextureImporter:
       name: Oni_Thug_Man_4
       rect:
         serializedVersion: 2
-        x: 241
-        y: 7
+        x: 220
+        y: 6
         width: 38
         height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Oni_Thug_Man_5
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 6
+        width: 30
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Oni_Thug_Man_6
+      rect:
+        serializedVersion: 2
+        x: 316
+        y: 15
+        width: 53
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Oni_Thug_Man_7
+      rect:
+        serializedVersion: 2
+        x: 380
+        y: 14
+        width: 48
+        height: 37
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
