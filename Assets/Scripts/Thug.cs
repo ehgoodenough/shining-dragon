@@ -120,6 +120,10 @@ public class Thug : MonoBehaviour {
 
 		//If we're close enough to the hero to jump
 		if(distanceFromHero <= attackDistance) {
+            if(manager.hasCompletedTutorial == false) {
+                Time.timeScale = 0.1f;
+            }
+            
 			if (Input.GetKeyDown (KeyCode.Space) && !((this.transform.position.x + movement.x - heroBufferXWidth) <= hero.transform.position.x)) {
 				//Debug.Log ("got here");
 				//Should tween nicely when we have time
@@ -129,12 +133,16 @@ public class Thug : MonoBehaviour {
 				//Debug.Log (stunPower);
 				this.hero.beStunned (stunPower);
 				stunPower = 0;
+                
+                Time.timeScale = 1f;
+                manager.hasCompletedTutorial = true;
 			}
 
 			if (distanceFromHero <= minSweetSpot) {
 				if (this.state != "attacking") {
 					
 					sweetSpotIndicatorForeground.GetComponent<SpriteRenderer> ().color = new Color (1f, 0.2f, 0.2f, 1);
+                    render.color = new Color(0.5f, 0.5f, 0.5f, 1f);
 				}
 			}
 
@@ -142,8 +150,7 @@ public class Thug : MonoBehaviour {
 			if ((this.transform.position.x + movement.x - heroBufferXWidth) <= hero.transform.position.x) {
 				this.transform.position = new Vector2 (this.hero.transform.position.x + heroBufferXWidth, this.transform.position.y);
 				if (this.state != "attacking") {
-					float tint = 0.0f;
-					render.color = new Color (tint, tint, tint, 1);
+                    animator.Play("Death");
 				}
 			}
         }

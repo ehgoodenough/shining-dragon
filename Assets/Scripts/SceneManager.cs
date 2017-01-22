@@ -17,6 +17,8 @@ public class SceneManager : MonoBehaviour {
     public const float restartTime = 3000;
     
     public bool gameHasEnded = false;
+    
+    public bool hasCompletedTutorial = false;
 
     private string state;
 

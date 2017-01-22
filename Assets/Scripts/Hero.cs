@@ -133,5 +133,7 @@ public class Hero : MonoBehaviour {
 		Thug thug = manager.getThug ();
 		thug.tryToDie ();
 		timeInEndlag = 0;
+        
+        Time.timeScale = 1f;
 	}
 }
