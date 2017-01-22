@@ -110,6 +110,10 @@ public class Thug : MonoBehaviour {
 				}
 			}
         }
+        
+        Vector3 cameraMovement = new Vector3(0f, 0f, 0f);
+        cameraMovement.x = (this.transform.position.x - 1f - Camera.main.transform.position.x) / 16;
+        Camera.main.transform.Translate(cameraMovement);
     }
 
     private void Attacking() {

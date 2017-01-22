@@ -13,7 +13,6 @@ public class WorldStuffSpawner : MonoBehaviour
 
 	void Start ()
     {
-        
         for(int i = 0; i < 7; i++)
         {
             var variance = Random.Range(-1f, 1f);
@@ -35,6 +34,6 @@ public class WorldStuffSpawner : MonoBehaviour
     void SpawnEnvironment (GameObject prefab, float x)
     {
         var obj = Instantiate(prefab, new Vector2(x, prefab.transform.position.y), Quaternion.identity);
-        obj.transform.parent = transform.parent;
+        obj.transform.parent = transform;
     }
 }
