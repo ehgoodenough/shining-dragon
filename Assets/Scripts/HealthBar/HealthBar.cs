@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour {
     public int OriginalWidth; // TODO fetch this automatically
@@ -19,6 +20,7 @@ public class HealthBar : MonoBehaviour {
     private RectTransform _RectTransform;
     public List<GlowEffect> LiveGlowEffects;
 
+    private Image _Image;
     private float BestScore;
 
 	// Use this for initialization
@@ -27,6 +29,8 @@ public class HealthBar : MonoBehaviour {
         LastWidth = OriginalWidth;
         _RectTransform = GetComponent<RectTransform>();
         HealthBarHolder = transform.parent.gameObject;
+
+        _Image = GetComponent<Image>();
     }
 
     // Update is called once per frame
@@ -60,6 +64,8 @@ public class HealthBar : MonoBehaviour {
             SpawnGlowEffect(new Vector3(leftEdge + subRightShift, transform.position.y, 0), totalWidth);
         }
 
+        _Image.color = new Color(1, percScale, percScale);
+        
         LastWidth = newWidth;
     }
 
@@ -67,7 +73,7 @@ public class HealthBar : MonoBehaviour {
     {
         var glowEffectGameObj = Instantiate(HPBarGlowEffectPreFab, position, Quaternion.identity);
         glowEffectGameObj.name = $"Glow Effect {position.x}";
-        glowEffectGameObj.transform.SetParent(HealthBarHolder.transform, true);
+        glowEffectGameObj.transform.SetParent(HealthBarHolder.transform , true);
 
         var rectTrans = glowEffectGameObj.GetComponent<RectTransform>();
         rectTrans.sizeDelta = new Vector2(width, rectTrans.sizeDelta.y);
