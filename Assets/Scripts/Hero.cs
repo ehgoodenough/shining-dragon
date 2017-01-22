@@ -5,6 +5,11 @@ using UnityEngine.UI;
 
 public class Hero : MonoBehaviour {
     public AudioClip attackSFX;
+    public AudioClip[] hitSFXList = new AudioClip[2];
+    public AudioClip[] VOSFXList = new AudioClip[6];
+    private int VOSFX;
+
+    private int hitSFX;
     
     public int maxhealth = 50;
     public int health = 50;
@@ -33,6 +38,7 @@ public class Hero : MonoBehaviour {
 		endlagDuration = 0.5f;
 		stunDuration = 1;
 		timeSinceStunned = 0;
+        hitSFX = Random.Range(0, hitSFXList.Length);
 
         // rotate the character to face the enemy
         Vector3 vector = transform.localScale;
@@ -102,7 +108,8 @@ public class Hero : MonoBehaviour {
 		this.state = "stunned";
 		this.timeSinceStunned = 0;
 		animator.Play("Block");
-        
+        source.PlayOneShot(hitSFXList[hitSFX]);
+
         moveBackToGo = stunPower / 15;
 	}
 
@@ -140,5 +147,8 @@ public class Hero : MonoBehaviour {
         
         Time.timeScale = 1f;
         manager.tutorialMessage.text = "";
+
+        VOSFX = Random.Range(0, VOSFXList.Length);
+        source.PlayOneShot(VOSFXList[VOSFX]);
 	}
 }
