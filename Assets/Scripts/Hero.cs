@@ -89,7 +89,7 @@ public class Hero : MonoBehaviour {
 	}
 
     public void beAttacked() {
-        this.health -= 30;
+        this.health -= 1;
         if(this.health <= 0) {
             manager.gameEnd(true);
             Debug.Log("You Win!!");
