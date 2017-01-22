@@ -69,6 +69,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GlowDuration: 0.3
   GlowDurationRemaining: 0
+  WorstColor: {r: 0.903, g: 0, b: 0, a: 0.709}
+  BestColor: {r: 1, g: 0.147, b: 0, a: 0.919}
+  ColorGlowSpeed: 25
+  ColorModifier: 1
 --- !u!222 &222713141553848392
 CanvasRenderer:
   m_ObjectHideFlags: 1
