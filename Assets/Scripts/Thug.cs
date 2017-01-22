@@ -217,6 +217,8 @@ public class Thug : MonoBehaviour {
                 }
             }
             
+            manager.comboMessage.text = combo + (combo >= 10 ? "!" : "") + (combo >= 15 ? "!" : "");
+            
             if(this.hero.health <= 0) {
                 this.state = "victory!";
                 
