@@ -34,6 +34,9 @@ public class Thug : MonoBehaviour {
     
     private float timeSinceDead = 0f;
 	private float timeSinceAlive = 0f;
+
+    private float combo = 0;
+    private const float PITCH_CHANGE = 0.3f;
     
 
 	private void Start() {
@@ -166,6 +169,8 @@ public class Thug : MonoBehaviour {
 
         if(Input.GetButtonDown("Action")) {
             this.hero.beAttacked();
+            source.pitch = 1 + combo * PITCH_CHANGE;
+            combo++;
             source.PlayOneShot(attackSFX);
             animator.Play("Attack");
         }
