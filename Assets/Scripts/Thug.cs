@@ -61,8 +61,8 @@ public class Thug : MonoBehaviour {
             this.Attacking();
         } else if(this.state == "dead") {
             timeSinceDead += Time.deltaTime;
-            if(timeSinceDead > 1) {
-                // body.isKinematic = true;
+            if(timeSinceDead > 0.35) {
+                manager.createThug();
                 this.state = "very dead";
             }
             return;
@@ -145,13 +145,6 @@ public class Thug : MonoBehaviour {
 	}
 
     private void beAttacked() {
-        // The thugs are so weak, they
-        // are killed in just in one hit!!
-		// manager.destroyThug();
-        
-        // Create a new thug to
-        // replace this thug.
-        manager.createThug();
         
         // Change the state.
         state = "dead";
