@@ -107,7 +107,7 @@ public class Hero : MonoBehaviour {
 	}
 
     public void beAttacked() {
-        this.health -= 10;
+        this.health -= 1;
         if(this.health <= 0) {
             this.health = 0;
             manager.gameEnd(true);
