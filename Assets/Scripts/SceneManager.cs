@@ -84,6 +84,8 @@ public class SceneManager : MonoBehaviour {
 
     void Update()
     {
-       
+       Vector3 cameraMovement = new Vector3(0f, 0f, 0f);
+       cameraMovement.x = (thug.transform.position.x - 1f - Camera.main.transform.position.x) / 16;
+       Camera.main.transform.Translate(cameraMovement);
     }
 }

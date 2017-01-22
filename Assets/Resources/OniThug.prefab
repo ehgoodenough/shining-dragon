@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 95265770885757042}
   - component: {fileID: 114983270615116188}
   - component: {fileID: 82098266438784214}
+  - component: {fileID: 70149863658352410}
   m_Layer: 0
   m_Name: OniThug
   m_TagString: Untagged
@@ -43,6 +44,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &70149863658352410
+CapsuleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1941445135334078}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: -0.02722788, y: 0.06398556}
+  m_Size: {x: 0.09653394, y: 0.4220289}
+  m_Direction: 0
 --- !u!82 &82098266438784214
 AudioSource:
   m_ObjectHideFlags: 1

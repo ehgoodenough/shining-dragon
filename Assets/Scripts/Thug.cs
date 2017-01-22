@@ -7,6 +7,8 @@ public class Thug : MonoBehaviour {
     public AudioClip attackSFX;
 
     private AudioSource source;
+    private Animator animator;
+    private Rigidbody2D body;
 
     private float speed = 0.05f;
     private string state = "moving";
@@ -28,6 +30,8 @@ public class Thug : MonoBehaviour {
 	private float stunPower = 0;
 
 	private float heroBufferXWidth = 0.4f;
+    
+    private float timeSinceDead = 0f;
 
 	private void Start() {
 		this.manager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
@@ -42,7 +46,12 @@ public class Thug : MonoBehaviour {
 		sweetSpotIndicator.transform.parent = this.transform;
 		sweetSpotIndicatorForeground = sweetSpotIndicator.transform.FindChild ("SweetSpotIndicatorForeground").gameObject;
 
+        animator = GetComponent<Animator>();
         source = GetComponent<AudioSource>();
+        
+        // body = GetComponent<Rigidbody2D>();
+        // body.isKinematic = true;
+        // body.detectCollisions = false;
     }
 
     private void Update() {
@@ -50,10 +59,21 @@ public class Thug : MonoBehaviour {
             this.Moving();
         } else if(this.state == "attacking") {
             this.Attacking();
+        } else if(this.state == "dead") {
+            timeSinceDead += Time.deltaTime;
+            if(timeSinceDead > 1) {
+                // body.isKinematic = true;
+                this.state = "very dead";
+            }
+            return;
+        } else if(this.state == "very dead") {
+            return;
         }
+        
 		sweetSpot = hero.transform.position.x + attackDistance - 0.4f;
 		float sweetSpotDiff = sweetSpot - sweetSpotIndicator.transform.position.x;
 		sweetSpotIndicator.transform.Translate (new Vector3(sweetSpotDiff, 0, 0));
+        
     }
 
     private void Moving() {
@@ -110,10 +130,6 @@ public class Thug : MonoBehaviour {
 				}
 			}
         }
-        
-        Vector3 cameraMovement = new Vector3(0f, 0f, 0f);
-        cameraMovement.x = (this.transform.position.x - 1f - Camera.main.transform.position.x) / 16;
-        Camera.main.transform.Translate(cameraMovement);
     }
 
     private void Attacking() {
@@ -131,13 +147,29 @@ public class Thug : MonoBehaviour {
     private void beAttacked() {
         // The thugs are so weak, they
         // are killed in just in one hit!!
-		manager.destroyThug();
+		// manager.destroyThug();
         
         // Create a new thug to
         // replace this thug.
         manager.createThug();
         
-        // TODO: Don't destroy the thug, but instead
-        // send it flying and sprawling in a heep.
+        // Change the state.
+        state = "dead";
+        
+        // Set the animation.
+        animator.Play("Death");
+        
+		sweetSpotIndicator.SetActive (false);
+
+        // Send the thug flying!
+        GetComponent<CapsuleCollider2D>().isTrigger = false;
+        body = gameObject.AddComponent<Rigidbody2D>() as Rigidbody2D;
+        body.isKinematic = false;
+        body.AddForce(new Vector2(Random.Range(4f, 6f), 5f), ForceMode2D.Impulse);
+        body.AddTorque(Random.Range(-0.5f, -1f), ForceMode2D.Impulse);
+        
+        SpriteRenderer render = GetComponent<SpriteRenderer>();
+        render.sortingOrder -= 1;
+        render.color = new Color(255, 255, 255, 1);
     }
 }
