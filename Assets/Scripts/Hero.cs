@@ -5,13 +5,15 @@ using UnityEngine.UI;
 
 public class Hero : MonoBehaviour {
     
-    private int maxhealth = 10;
-    private int health = 10;
+    private int maxhealth = 50;
+    private int health = 50;
     
 	private string state = "unset";
 	private SceneManager manager;
 
-	float timeSinceReady;
+    private Animator animator;
+
+    float timeSinceReady;
 	float timeInEndlag;
 	float timeSinceStunned;
 
@@ -27,6 +29,18 @@ public class Hero : MonoBehaviour {
 		endlagDuration = 0.5f;
 		stunDuration = 1;
 		timeSinceStunned = 0;
+
+        // rotate the character to face the enemy
+        Vector3 vector = transform.localScale;
+        vector.x *= -1;
+        transform.localScale = vector;
+
+        // set above the ground
+        Vector3 position = transform.position;
+        position.y = 2.15f;
+        transform.position = position;
+
+        animator = GetComponent<Animator>();
 	}
     
 	void Update() {
@@ -34,7 +48,9 @@ public class Hero : MonoBehaviour {
 			timeSinceStunned += Time.deltaTime;
 			if (timeSinceStunned >= stunDuration) {
 				this.state = "ready";
-				timeSinceReady = 0;
+
+                animator.Play("Attack");
+                timeSinceReady = 0;
 			}
 		}
 
@@ -54,7 +70,11 @@ public class Hero : MonoBehaviour {
 		}
 
 		if (this.state == "walking") {
-			this.transform.Translate (new Vector2 (0.01f, 0));
+			this.transform.Translate(new Vector2 (0.01f, 0));
+            
+            if(this.transform.position.x >= 9) {
+                Debug.Log("You Lose!!");
+            }
 		}
 
 		//Debug.Log (this.state);

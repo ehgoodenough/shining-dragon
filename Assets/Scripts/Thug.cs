@@ -34,7 +34,12 @@ public class Thug : MonoBehaviour {
 		sweetSpot = hero.transform.position.x + attackDistance - 2;
 		sweetSpotIndicator = Instantiate (SweetSpotIndicator, new Vector3(sweetSpot, 2, 0), Quaternion.identity);
 		sweetSpotIndicator.transform.parent = this.transform;
-	}
+
+        // set above the ground
+        Vector3 position = transform.position;
+        position.y = 2f;
+        transform.position = position;
+    }
 
     private void Update() {
         if(this.state == "moving") {
