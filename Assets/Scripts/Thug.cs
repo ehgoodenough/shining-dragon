@@ -149,7 +149,10 @@ public class Thug : MonoBehaviour {
 				//stunPower = 0;
                 
                 Time.timeScale = 1f;
-                manager.tutorialMessage.text = "Now button-mash the SPACEBAR!!";
+                
+                if(manager.hasCompletedTutorial == false) {
+                    manager.tutorialMessage.text = "Now button-mash the SPACEBAR!!";
+                }
 			}
 
 			if (distanceFromHero <= minSweetSpot) {
