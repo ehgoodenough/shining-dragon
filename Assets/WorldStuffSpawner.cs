@@ -5,27 +5,30 @@ using UnityEngine;
 public class WorldStuffSpawner : MonoBehaviour
 {
     public GameObject TreePreFab;
-    public GameObject CloudsPreFab;
+
+    public GameObject Floor;
+
+    private List<GameObject> Environments;
+    
 
 	void Start ()
     {
-        SpawnTree(0);
-        SpawnClouds(0); 
+        for(int i = 0; i < 7; i++)
+        {
+            var variance = Random.Range(-1f, 1f);
+
+            SpawnTree(-i * 5 + variance);
+        }
 	}
 	
 	void Update ()
     {
 		
 	}
-
+    
     void SpawnTree (float x)
     {
         SpawnEnvironment(TreePreFab, x);
-    }
-
-    void SpawnClouds (float x)
-    {
-        SpawnEnvironment(CloudsPreFab, x);
     }
 
     void SpawnEnvironment (GameObject prefab, float x)

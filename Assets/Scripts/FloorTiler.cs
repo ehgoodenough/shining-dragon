@@ -16,6 +16,8 @@ public class FloorTiler : MonoBehaviour {
         childSprite.transform.position = transform.position;
         childSprite.sprite = sprite.sprite;
         childSprite.transform.localScale = new Vector3(1, 1);
+        childSprite.sortingOrder = sprite.sortingOrder;
+        childSprite.sortingLayerID = sprite.sortingLayerID;
 
         GameObject child;
 
@@ -33,6 +35,7 @@ public class FloorTiler : MonoBehaviour {
             child = Instantiate(childPrefab) as GameObject;
             child.transform.position = new Vector3(leftEdge + currentHorizontalIndex * widthPer, transform.position.y, transform.position.z) + usingCenterBaseFix;
             child.transform.parent = transform;
+            
             //Debug.Log($"Placed one at {child.transform.position.x}, {child.transform.position.y}; this effectively goes from x={child.transform.position.x - (spriteSize.x / 2)} to x={child.transform.position.x + (spriteSize.x / 2)}");
         }
 
