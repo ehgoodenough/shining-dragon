@@ -46,7 +46,6 @@ public class SceneManager : MonoBehaviour {
     {
         if(this.gameHasEnded != true) {
             this.gameHasEnded = true;
-            print("game end");
             if (win)
             {
                 endMessage.text = "You Win!";
@@ -64,8 +63,7 @@ public class SceneManager : MonoBehaviour {
         yield return new WaitForSeconds(time);
 
         // Code to execute after the delay
-        print("execute after time");
-        Application.LoadLevel(0);
+        Application.LoadLevel(Application.loadedLevel);
     }
 
     public Thug createThug() {
