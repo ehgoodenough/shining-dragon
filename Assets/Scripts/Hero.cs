@@ -140,15 +140,15 @@ public class Hero : MonoBehaviour {
 	}
 
 	public void punch() {
-        //source.PlayOneShot(attackSFX);
-		this.state = "endlag";
+        AudioSource a = GameObject.Find("World").GetComponent<AudioSource>();
+        a.PlayOneShot(attackSFX);
+        this.state = "endlag";
 		Thug thug = manager.getThug ();
 		thug.tryToDie ();
 		timeInEndlag = 0;
 
         VOSFX = Random.Range(0, VOSFXList.Length);
         source.PlayOneShot(VOSFXList[VOSFX]);
-
         Time.timeScale = 1f;
         manager.tutorialMessage.text = "";
 	}
