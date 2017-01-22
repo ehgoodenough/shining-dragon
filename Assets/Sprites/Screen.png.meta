@@ -1,12 +1,9 @@
 fileFormatVersion: 2
-guid: bc62d5c2089f746e58b587f42b2eb162
-timeCreated: 1485126605
+guid: 5e93fd960df074f52b2a3b8080d4d237
+timeCreated: 1485128297
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Oni_Thug_Tusken_Raider_0
-    21300002: Oni_Thug_Tusken_Raider_1
-    21300004: Oni_Thug_Tusken_Raider_2
+  fileIDToRecycleName: {}
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -37,7 +34,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -79,46 +76,7 @@ TextureImporter:
     overridden: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: Oni_Thug_Tusken_Raider_0
-      rect:
-        serializedVersion: 2
-        x: 10
-        y: 12
-        width: 20
-        height: 70
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Oni_Thug_Tusken_Raider_1
-      rect:
-        serializedVersion: 2
-        x: 41
-        y: 12
-        width: 20
-        height: 70
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Oni_Thug_Tusken_Raider_2
-      rect:
-        serializedVersion: 2
-        x: 75
-        y: 12
-        width: 20
-        height: 70
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
+    sprites: []
     outline: []
   spritePackingTag: 
   userData: 
