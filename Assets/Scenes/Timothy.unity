@@ -605,6 +605,21 @@ Prefab:
       propertyPath: HealthBarHolder
       value: 
       objectReference: {fileID: 746975661}
+    - target: {fileID: 114413138109438344, guid: 34e3e59d9c008b84cbf3fbb58d824b3e,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114413138109438344, guid: 34e3e59d9c008b84cbf3fbb58d824b3e,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114413138109438344, guid: 34e3e59d9c008b84cbf3fbb58d824b3e,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 34e3e59d9c008b84cbf3fbb58d824b3e, type: 2}
   m_IsPrefabParent: 0
