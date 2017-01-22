@@ -501,6 +501,11 @@ Prefab:
       propertyPath: endMessage
       value: 
       objectReference: {fileID: 1248732336}
+    - target: {fileID: 82779416871797002, guid: 3405384dc1c0f4c07865c4d29a92da1c,
+        type: 2}
+      propertyPath: m_Volume
+      value: 0.503
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3405384dc1c0f4c07865c4d29a92da1c, type: 2}
   m_IsPrefabParent: 0
@@ -910,6 +915,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TreePreFab: {fileID: 1293246809796498, guid: 9ce48f7cfd832804aa6de138c49cefa5, type: 2}
   Floor: {fileID: 2085257978}
+  Environments: []
 --- !u!1 &2085257978 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1166894403369046, guid: 17fbb92b3d747724e9447be7356e6504,
