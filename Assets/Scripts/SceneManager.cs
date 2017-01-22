@@ -60,7 +60,7 @@ public class SceneManager : MonoBehaviour {
 
         // Code to execute after the delay
         print("execute after time");
-        Application.LoadLevel(1);
+        Application.LoadLevel(0);
     }
 
     public Thug createThug() {
