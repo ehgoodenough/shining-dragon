@@ -18,6 +18,7 @@ public class HealthBar : MonoBehaviour {
     private int OriginalNumberOfPipes;
     private List<GameObject> Pipes;
     public float WidthPerPipe;
+    public int LastHealth;
 
     public List<GlowEffect> LiveGlowEffects;
 
@@ -27,6 +28,8 @@ public class HealthBar : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        LiveGlowEffects = new List<GlowEffect>();
+
         StartingX = transform.position.x;
         HealthBarHolder = transform.parent.gameObject;
 
@@ -37,6 +40,7 @@ public class HealthBar : MonoBehaviour {
 
         PreparePipes();
 
+        LastHealth = OriginalNumberOfPipes;
         _Sprite.enabled = false;
     }
 
@@ -93,13 +97,34 @@ public class HealthBar : MonoBehaviour {
             sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 1.0f);
         }
 
+        int lostHealth = LastHealth - health;
+        if (lostHealth < 0)
+            lostHealth = 0;
+
         for(int i = health; i < maxHealth; i++)
         {
             var pipe = Pipes[i];
             var sprite = pipe.GetComponent<SpriteRenderer>();
 
+            var justDied = sprite.color.a != 0.0f;
             sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 0.0f);
+
+            if(justDied)
+            {
+                var glowEffectObj = Instantiate(HPBarGlowEffectPreFab);
+                glowEffectObj.transform.position = new Vector3(pipe.transform.position.x, pipe.transform.position.y, pipe.transform.position.z);
+                glowEffectObj.transform.parent = transform;
+                var glowEffect = glowEffectObj.GetComponent<GlowEffect>();
+                float score = lostHealth;
+                if (LiveGlowEffects.Count > 0)
+                    score += LiveGlowEffects[LiveGlowEffects.Count - 1].ComboMultiplier * 1.1f;
+                
+                glowEffect.ComboMultiplier = score;
+                LiveGlowEffects.Add(glowEffect);
+            }
         }
+
+        LastHealth = health;
     }
 
     private void SpawnGlowEffect(Vector3 position, int width)

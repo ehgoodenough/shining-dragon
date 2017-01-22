@@ -558,7 +558,7 @@ GameObject:
   - component: {fileID: 819552838}
   - component: {fileID: 819552837}
   m_Layer: 0
-  m_Name: HealthBar2
+  m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -588,7 +588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79476c08ff8813644b14a16154e01630, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HPBarGlowEffectPreFab: {fileID: 1656046730565742, guid: 56e9b8b5303648b4b84226b98d5143b5,
+  HPBarGlowEffectPreFab: {fileID: 1842848047258500, guid: 56e9b8b5303648b4b84226b98d5143b5,
     type: 2}
   DebugHealthBar: 0
   DebugForcedHealth: 15
@@ -754,7 +754,7 @@ GameObject:
   - component: {fileID: 1712283478}
   - component: {fileID: 1712283479}
   m_Layer: 0
-  m_Name: HealthBarOverlay2
+  m_Name: HealthBarOverlay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
