@@ -172,7 +172,6 @@ public class Thug : MonoBehaviour {
 				}
                 
                 Time.timeScale = 1f;
-                manager.hasCompletedTutorial = true;
                 
                 if(manager.hasCompletedTutorial == false) {
                     manager.tutorialMessage.text = "Now button-mash the SPACEBAR!!";
@@ -225,7 +224,7 @@ public class Thug : MonoBehaviour {
                 // and flying away and you don't need it anymore!!
                 sweetSpotIndicator.SetActive(false);
                 
-                // animator.Play("Victory");
+                animator.Play("Victory");
             }
         }
     }
