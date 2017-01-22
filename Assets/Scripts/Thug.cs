@@ -20,6 +20,7 @@ public class Thug : MonoBehaviour {
 
 	public GameObject SweetSpotIndicator;
 	private GameObject sweetSpotIndicator;
+	private GameObject sweetSpotIndicatorForeground;
 
 	private float maxSweetSpot;
 	private float minSweetSpot;
@@ -37,8 +38,9 @@ public class Thug : MonoBehaviour {
 		minSweetSpot = 0.6f;
 
 		sweetSpot = hero.transform.position.x + attackDistance - 0.4f;
-		sweetSpotIndicator = Instantiate (SweetSpotIndicator, new Vector3(sweetSpot, -0.78f, 0), Quaternion.identity);
+		sweetSpotIndicator = Instantiate (SweetSpotIndicator, new Vector3(sweetSpot, -0.795f, 0), Quaternion.identity);
 		sweetSpotIndicator.transform.parent = this.transform;
+		sweetSpotIndicatorForeground = sweetSpotIndicator.transform.FindChild ("SweetSpotIndicatorForeground").gameObject;
 
         source = GetComponent<AudioSource>();
     }
@@ -72,17 +74,21 @@ public class Thug : MonoBehaviour {
 
 		if (distanceFromHero > attackDistance || distanceFromHero < minSweetSpot) {
 			stunPower = 0;
-			Debug.Log (stunPower);
+			//Debug.Log (stunPower);
 
 		} else if (distanceFromHero < maxSweetSpot && distanceFromHero > minSweetSpot) {
 			stunPower = 1;
-			Debug.Log (stunPower);
+			//Debug.Log (stunPower);
 
 		} else {
 			stunPower = 1 / ((distanceFromHero - (maxSweetSpot - 1))*(distanceFromHero - (maxSweetSpot - 1)));
-			Debug.Log (stunPower);
-
+			//Debug.Log (stunPower);
 		}
+
+		float currentXPos =  sweetSpotIndicatorForeground.transform.position.x;
+		float xPosTarget = sweetSpotIndicator.transform.position.x - (stunPower*0.4f);
+		sweetSpotIndicatorForeground.transform.localScale = new Vector3(1-stunPower, 1, 1);
+		sweetSpotIndicatorForeground.transform.Translate ((xPosTarget - currentXPos), 0, 0);
 
 		//If we're close enough to the hero to jump
 		if(distanceFromHero <= attackDistance) {

@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackSFX: {fileID: 8300000, guid: 28a616a154a3bbb47816b580e9ce5993, type: 3}
-  SweetSpotIndicator: {fileID: 1139551320605738, guid: 4c48b90a139f24f9b8e4635a07fdfe5a,
+  SweetSpotIndicator: {fileID: 1529318538645846, guid: 4c48b90a139f24f9b8e4635a07fdfe5a,
     type: 2}
 --- !u!212 &212520685000493466
 SpriteRenderer:
