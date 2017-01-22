@@ -131,7 +131,8 @@ public class Thug : MonoBehaviour {
 				//Debug.Log ("got here");
 				//Should tween nicely when we have time
 				this.transform.position = new Vector2 (this.hero.transform.position.x + heroBufferXWidth, this.transform.position.y);
-                this.state = "attacking";  
+                this.state = "attacking";
+                animator.Play("AttackIdle");
 				//Debug.Log (stunPower);
 				this.hero.beStunned (stunPower);
 				stunPower = 0;
