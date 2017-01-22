@@ -51,5 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ef3ca0cf144740869b435396e598110, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hero: {fileID: 1000203977619838, guid: 337ce02ef3cc0471ebf177f817c59844, type: 2}
-  Thug: {fileID: 1790646938287676, guid: d2dc86db6ed2043ce83b042042c09def, type: 2}
+  healthbar: {fileID: 114837599439926266, guid: 34e3e59d9c008b84cbf3fbb58d824b3e,
+    type: 2}
+  endMessage: {fileID: 114157678776188750, guid: e7050a3cedb9bde438e7c9dd3d13e3a1,
+    type: 2}
+  gameHasEnded: 0
