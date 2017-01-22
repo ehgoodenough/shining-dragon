@@ -7,6 +7,8 @@ public class Thug : MonoBehaviour {
     public AudioClip attackSFX;
 
     private AudioSource source;
+    private Animator animator;
+    private Rigidbody2D body;
 
     private float speed = 0.05f;
     private string state = "moving";
@@ -28,6 +30,8 @@ public class Thug : MonoBehaviour {
 	private float stunPower = 0;
 
 	private float heroBufferXWidth = 0.4f;
+    
+    private float timeSinceDead = 0f;
 
 	private void Start() {
 		this.manager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
@@ -42,6 +46,7 @@ public class Thug : MonoBehaviour {
 		sweetSpotIndicator.transform.parent = this.transform;
 		sweetSpotIndicatorForeground = sweetSpotIndicator.transform.FindChild ("SweetSpotIndicatorForeground").gameObject;
 
+        animator = GetComponent<Animator>();
         source = GetComponent<AudioSource>();
         
         // body = GetComponent<Rigidbody2D>();
@@ -55,6 +60,13 @@ public class Thug : MonoBehaviour {
         } else if(this.state == "attacking") {
             this.Attacking();
         } else if(this.state == "dead") {
+            timeSinceDead += Time.deltaTime;
+            if(timeSinceDead > 1) {
+                // body.isKinematic = true;
+                this.state = "very dead";
+            }
+            return;
+        } else if(this.state == "very dead") {
             return;
         }
         
@@ -141,13 +153,19 @@ public class Thug : MonoBehaviour {
         // replace this thug.
         manager.createThug();
         
+        // Change the state.
         state = "dead";
+        
+        // Set the animation.
+        animator.Play("Death");
         
         // Send the thug flying!
         GetComponent<CapsuleCollider2D>().isTrigger = false;
-        Rigidbody2D body = gameObject.AddComponent<Rigidbody2D>() as Rigidbody2D;
+        body = gameObject.AddComponent<Rigidbody2D>() as Rigidbody2D;
         body.isKinematic = false;
         body.AddForce(new Vector2(5f, 5f), ForceMode2D.Impulse);
         body.AddTorque(-0.5f, ForceMode2D.Impulse);
+        
+        // SweetSpotIndicator.SetActive(false);
     }
 }
