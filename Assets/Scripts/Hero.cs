@@ -52,7 +52,7 @@ public class Hero : MonoBehaviour {
                 animator.Play("Attack");
                 timeSinceReady = 0;
 			}
-			float tint = (stunDuration - timeSinceStunned)/stunDuration/2;
+			float tint = 1 - (stunDuration - timeSinceStunned)/stunDuration;
 			this.GetComponent<SpriteRenderer> ().color = new Color (tint, tint, tint, 1);
 		}
 
