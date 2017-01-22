@@ -76,6 +76,8 @@ public class Thug : MonoBehaviour {
             return;
         } else if(this.state == "very dead") {
             return;
+        } else if(this.state == "victory!") {
+            return;
         }
         
 		sweetSpot = hero.transform.position.x + attackDistance - 0.4f;
@@ -181,16 +183,27 @@ public class Thug : MonoBehaviour {
 
         if(Input.GetButtonDown("Action")) {
             this.hero.beAttacked();
+            
             source.pitch = 1 + combo * PITCH_CHANGE;
-            combo++;
             source.PlayOneShot(attackSFX);
             animator.Play("Attack");
             
+            combo += 1;
             if(combo > 4) {
                 if(manager.hasCompletedTutorial == false) {
                     manager.hasCompletedTutorial = true;
                     manager.tutorialMessage.text = "";
                 }
+            }
+            
+            if(this.hero.health <= 0) {
+                this.state = "victory!";
+                
+                // remove the indicator, cuz the hero is dead
+                // and flying away and you don't need it anymore!!
+                sweetSpotIndicator.SetActive(false);
+                
+                // animator.Play("Victory");
             }
         }
     }
