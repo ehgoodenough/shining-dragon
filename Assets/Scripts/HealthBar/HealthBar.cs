@@ -5,7 +5,7 @@ using UnityEngine;
 public class HealthBar : MonoBehaviour {
     public int OriginalWidth; // TODO fetch this automatically
 
-    public GameObject HealthBarHolder;
+    private GameObject HealthBarHolder;
     public GameObject HPBarGlowEffectPreFab;
 
     public bool DebugHealthBar;
@@ -19,11 +19,14 @@ public class HealthBar : MonoBehaviour {
     private RectTransform _RectTransform;
     public List<GlowEffect> LiveGlowEffects;
 
+    private float BestScore;
+
 	// Use this for initialization
 	void Start () {
         StartingX = (int)transform.position.x;
         LastWidth = OriginalWidth;
         _RectTransform = GetComponent<RectTransform>();
+        HealthBarHolder = transform.parent.gameObject;
     }
 
     // Update is called once per frame
@@ -71,10 +74,15 @@ public class HealthBar : MonoBehaviour {
 
         var glowEffect = glowEffectGameObj.GetComponent<GlowEffect>();
 
-        var duration = glowEffect.GlowDuration + 0.2f * LiveGlowEffects.Count;
+        var score = (float)width;
+        if (LiveGlowEffects.Count > 0)
+            score += LiveGlowEffects[LiveGlowEffects.Count - 1].ComboMultiplier;
+        glowEffect.ComboMultiplier = score;
 
-        glowEffect.GlowDuration = duration;
-        glowEffect.GlowDurationRemaining = duration;
+        if(score > BestScore)
+        {
+            BestScore = score;
+        }
 
         LiveGlowEffects.Add(glowEffect);
     }

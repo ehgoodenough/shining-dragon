@@ -41,7 +41,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.7434483, g: 0.9607843, b: 0.6392157, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -68,11 +68,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GlowDuration: 0.3
-  GlowDurationRemaining: 0
-  WorstColor: {r: 0.903, g: 0, b: 0, a: 0.709}
-  BestColor: {r: 1, g: 0.147, b: 0, a: 0.919}
-  ColorGlowSpeed: 25
-  ColorModifier: 1
+  ComboMultiplier: 0
+  BetterColor: {r: 0.1944204, g: 0.85294116, b: 0.49870244, a: 1}
+  BetterDuration: 0.5
+  EvenBetterColor: {r: 0.06704153, g: 0.9117647, b: 0.07286716, a: 1}
+  EvenBetterDuration: 0.8
+  BestColor: {r: 0, g: 1, b: 0, a: 1}
+  BestDuration: 1.2
 --- !u!222 &222713141553848392
 CanvasRenderer:
   m_ObjectHideFlags: 1

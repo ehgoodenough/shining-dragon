@@ -6,82 +6,84 @@ using UnityEngine.UI;
 
 public class GlowEffect : MonoBehaviour {
     public float GlowDuration;
-    public float GlowDurationRemaining;
 
-    /// <summary>
-    /// The "worst" color that the glow effect can be. If there is
-    /// </summary>
-    public Color WorstColor;
+    private float RealGlowDuration;
+    private float RealGlowDurationRemaining;
 
-    /// <summary>
-    /// The "best" color that the glow effect can be
-    /// </summary>
+    public float ComboMultiplier;
+
+    public float Progress
+    {
+        get
+        {
+            return (RealGlowDuration - RealGlowDurationRemaining) / RealGlowDuration;
+        }
+    }
+
+    public Color BetterColor;
+    public float BetterDuration;
+    public Color EvenBetterColor;
+    public float EvenBetterDuration;
     public Color BestColor;
-
-    /// <summary>
-    /// This is multiplied by seconds to go through a sine wave for modifying
-    /// redness by the redness modifier. If the color glow speed is 0 the redness
-    /// is not effected
-    /// </summary>
-    public float ColorGlowSpeed;
-
-    /// <summary>
-    /// The maximum shift in color throughout the color glow speed. Highest value
-    /// is 1. At 1 the color will alternate from the best color to the worst color
-    /// at the color glow speed.
-    /// </summary>
-    public float ColorModifier;
-
+    public float BestDuration;
+    
     private Image _Image;
 
     private HealthBar _HealthBar;
 
+    private Color BaseColor;
+
 	// Use this for initialization
 	void Start () {
-        GlowDurationRemaining = GlowDuration;
         _Image = GetComponent<Image>();
         _HealthBar = GameObject.Find("HealthBar").GetComponent<HealthBar>();
+
+        if (ComboMultiplier < 20)
+        {
+            RealGlowDuration = GlowDuration;
+            BaseColor = _Image.color;
+        }
+        else if (ComboMultiplier < 50)
+        {
+            RealGlowDuration = BetterDuration;
+            BaseColor = BetterColor;
+        }
+        else if (ComboMultiplier < 100)
+        {
+            RealGlowDuration = EvenBetterDuration;
+            BaseColor = EvenBetterColor;
+        }
+        else 
+        {
+            RealGlowDuration = BestDuration;
+            BaseColor = BestColor;
+        }
+
+        RealGlowDurationRemaining = RealGlowDuration;
+        var yScale = 1.0f + ComboMultiplier / 50.0f;
+
+        transform.localScale = new Vector3(1, yScale, 1);
     }
 	
 	// Update is called once per frame
 	void Update () {
-        GlowDurationRemaining -= Time.deltaTime;
+        RealGlowDurationRemaining -= Time.deltaTime;
         
-        if(GlowDurationRemaining <= 0)
+        if(RealGlowDurationRemaining <= 0)
         {
             _HealthBar.LiveGlowEffects.Remove(this);
             Destroy(gameObject);
         }else
         {
-            var current = GlowDuration - GlowDurationRemaining;
-            var percToDone = current / GlowDuration;
+            var current = RealGlowDuration - RealGlowDurationRemaining;
+            var percToDone = current / RealGlowDuration;
 
-            if (GlowDuration <= 0.5f)
-                _Image.color = DecideColorAlphaFade(percToDone);
-            else
-            {
-                _Image.color = DecideColorAlternateFade(current, 0, GlowDuration, WorstColor, BestColor);
-                Debug.Log($"color = {_Image.color}");
-            }
-                
+             _Image.color = ColorAlphaFade(BaseColor, percToDone);
         }
 	}
 
-    Color DecideColorAlphaFade(float percProgress)
+    Color ColorAlphaFade(Color baseColor, float percProgress)
     {
-        return new Color(_Image.color.r, _Image.color.g, _Image.color.b, 1.0f - percProgress);
-    }
-
-    Color DecideColorAlternateFade(float current, float initial, float final, Color color1, Color color2)
-    {
-        Debug.Log($"Fade({current}, {current}, {final}, {color1}, {color2})");
-        var sine = Mathf.Sin(current * ColorGlowSpeed);
-
-        return new Color(
-            color1.r + (color2.r - color1.r) * sine,
-            color1.g + (color2.g - color1.g) * sine,
-            color1.b + (color2.b - color1.b) * sine,
-            color1.a + (color2.a - color1.a) * sine
-            );
+        return new Color(baseColor.r, baseColor.g, baseColor.b, 1.0f - percProgress);
     }
 }
