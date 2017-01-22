@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Thug : MonoBehaviour {
+    public AudioClip attackSFX;
+
+    private AudioSource source;
 
     private float speed = 0.25f;
     private string state = "moving";
@@ -39,6 +42,8 @@ public class Thug : MonoBehaviour {
         Vector3 position = transform.position;
         position.y = 2f;
         transform.position = position;
+
+        source = GetComponent<AudioSource>();
     }
 
     private void Update() {
@@ -102,6 +107,7 @@ public class Thug : MonoBehaviour {
 
         if(Input.GetButtonDown("Action")) {
             this.hero.beAttacked();
+            source.PlayOneShot(attackSFX);
         }
     }
     
