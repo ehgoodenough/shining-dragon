@@ -47,6 +47,10 @@ public class Hero : MonoBehaviour {
 	}
     
 	void Update() {
+        if(this.manager.gameHasEnded == true) {
+            return;
+        }
+        
 		if (this.state == "stunned") {
 			timeSinceStunned += Time.deltaTime;
 			if (timeSinceStunned >= stunDuration) {
@@ -55,6 +59,8 @@ public class Hero : MonoBehaviour {
                 animator.Play("Attack");
                 timeSinceReady = 0;
 			}
+			float tint = 1 - (stunDuration - timeSinceStunned)/stunDuration;
+			this.GetComponent<SpriteRenderer> ().color = new Color (tint, tint, tint, 1);
 		}
 
 		if (this.state == "ready") {
@@ -62,6 +68,7 @@ public class Hero : MonoBehaviour {
 			if (timeSinceReady >= readyDuration) {
 				this.punch ();
 			}
+			this.GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1, 1);
 		}
 
 		if (this.state == "endlag") {
@@ -89,11 +96,13 @@ public class Hero : MonoBehaviour {
 		this.stunDuration = stunPower;
 		this.state = "stunned";
 		this.timeSinceStunned = 0;
+		animator.Play("Block");
 	}
 
     public void beAttacked() {
         this.health -= 1;
         if(this.health <= 0) {
+            this.health = 0;
             manager.gameEnd(true);
             Debug.Log("You Win!!");
         }

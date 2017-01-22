@@ -9,21 +9,21 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1464573439882262}
+  m_RootGameObject: {fileID: 1341897487214478}
   m_IsPrefabParent: 1
---- !u!1 &1464573439882262
+--- !u!1 &1341897487214478
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4970307972059730}
-  - component: {fileID: 212326216328589170}
-  - component: {fileID: 95468754226557322}
-  - component: {fileID: 114576574089547640}
-  - component: {fileID: 114774959323242664}
-  - component: {fileID: 82167222380960974}
+  - component: {fileID: 4060314511587322}
+  - component: {fileID: 212531195439994140}
+  - component: {fileID: 95264218799668236}
+  - component: {fileID: 114041229616707042}
+  - component: {fileID: 114518539410952090}
+  - component: {fileID: 82410278565179484}
   m_Layer: 0
   m_Name: MonkHero 1
   m_TagString: Untagged
@@ -31,12 +31,12 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4970307972059730
+--- !u!4 &4060314511587322
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1464573439882262}
+  m_GameObject: {fileID: 1341897487214478}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.0341916, y: 2.2564962, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
@@ -44,12 +44,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &82167222380960974
+--- !u!82 &82410278565179484
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1464573439882262}
+  m_GameObject: {fileID: 1341897487214478}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
@@ -124,13 +124,13 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!95 &95468754226557322
+--- !u!95 &95264218799668236
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1464573439882262}
+  m_GameObject: {fileID: 1341897487214478}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 9898a19add359a94284789ac426d9026, type: 2}
@@ -141,35 +141,35 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114576574089547640
+--- !u!114 &114041229616707042
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1464573439882262}
+  m_GameObject: {fileID: 1341897487214478}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114774959323242664
+--- !u!114 &114518539410952090
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1464573439882262}
+  m_GameObject: {fileID: 1341897487214478}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e60d27dac27c4645939a9757d6501da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attackSFX: {fileID: 8300000, guid: 6f1799a02a722cd46bb8c5383bc53fea, type: 3}
---- !u!212 &212326216328589170
+--- !u!212 &212531195439994140
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1464573439882262}
+  m_GameObject: {fileID: 1341897487214478}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0

@@ -82,15 +82,15 @@ public class Thug : MonoBehaviour {
 			if (Input.GetKeyDown (KeyCode.Space)) {
 				//Debug.Log ("got here");
 				//Should tween nicely when we have time
-				this.transform.position = new Vector2 (this.hero.transform.position.x + this.transform.localScale.x/5, this.transform.position.y);
+				this.transform.position = new Vector2 (this.hero.transform.position.x + 2, this.transform.position.y);
 				this.state = "attacking";
 				//Debug.Log (stunPower);
 				this.hero.beStunned (stunPower);
 			}
 
 			//If the thug reaches the hero without pressing space
-			if ((this.transform.position.x + movement.x - this.transform.localScale.x/5) <= hero.transform.position.x) {
-				this.transform.position = new Vector2 (this.hero.transform.position.x + this.transform.localScale.x/5, this.transform.position.y);
+			if ((this.transform.position.x + movement.x - 2) <= hero.transform.position.x) {
+				this.transform.position = new Vector2 (this.hero.transform.position.x + 2, this.transform.position.y);
 				this.state = "attacking";
 				//Debug.Log (stunPower);
 
