@@ -166,7 +166,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b024c2ff23d3b4a5dbd3707be2fd4160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackSFX: {fileID: 8300000, guid: 28a616a154a3bbb47816b580e9ce5993, type: 3}
+  attackSFXList:
+  - {fileID: 8300000, guid: b39e5727c84d45a42aa8c341ec47656e, type: 3}
+  - {fileID: 8300000, guid: 1abda8ba9cc341b45820ca3c1fa6823f, type: 3}
+  - {fileID: 8300000, guid: e430b442a667513468b1c5fdbef058fd, type: 3}
+  runSFX: []
+  screamSFX: {fileID: 0}
+  stunAttackSFX: {fileID: 0}
+  hitGroundSFX: {fileID: 0}
   SweetSpotIndicator: {fileID: 1529318538645846, guid: 4c48b90a139f24f9b8e4635a07fdfe5a,
     type: 2}
 --- !u!212 &212520685000493466

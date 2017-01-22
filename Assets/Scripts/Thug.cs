@@ -4,7 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Thug : MonoBehaviour {
-    public AudioClip attackSFX;
+    public AudioClip[] attackSFXList = new AudioClip[3];
+    public AudioClip[] runSFX = new AudioClip[2];
+    public AudioClip screamSFX;
+    public AudioClip stunAttackSFX;
+    public AudioClip hitGroundSFX;
 
     private AudioSource source;
     private Animator animator;
@@ -37,11 +41,14 @@ public class Thug : MonoBehaviour {
 
     private float combo = 0;
     private const float PITCH_CHANGE = 0.3f;
+
+    private int attackSfx = 0;
     
 
 	private void Start() {
 		this.manager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
 		this.hero = manager.getHero();
+        attackSfx = Random.Range(0, attackSFXList.Length);
 
 		attackDistance = 1.4f;
 		maxSweetSpot = 0.7f;
@@ -128,7 +135,6 @@ public class Thug : MonoBehaviour {
             }
 			if (distanceFromHero <= minSweetSpot) {
 				if (this.state != "attacking") {
-
 					sweetSpotIndicatorForeground.GetComponent<SpriteRenderer> ().color = new Color (1f, 0.2f, 0.2f, 1);
 				}
 			}
@@ -171,7 +177,7 @@ public class Thug : MonoBehaviour {
             this.hero.beAttacked();
             source.pitch = 1 + combo * PITCH_CHANGE;
             combo++;
-            source.PlayOneShot(attackSFX);
+            source.PlayOneShot(attackSFXList[attackSfx]);
             animator.Play("Attack");
         }
     }
