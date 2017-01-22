@@ -52,6 +52,8 @@ public class Hero : MonoBehaviour {
                 animator.Play("Attack");
                 timeSinceReady = 0;
 			}
+			float tint = (stunDuration - timeSinceStunned)/stunDuration/2;
+			this.GetComponent<SpriteRenderer> ().color = new Color (tint, tint, tint, 1);
 		}
 
 		if (this.state == "ready") {
@@ -59,6 +61,7 @@ public class Hero : MonoBehaviour {
 			if (timeSinceReady >= readyDuration) {
 				this.punch ();
 			}
+			this.GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1, 1);
 		}
 
 		if (this.state == "endlag") {
