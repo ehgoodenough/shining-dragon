@@ -32,7 +32,7 @@ public class Thug : MonoBehaviour {
 		minSweetSpot = 3.0f;
 
 		sweetSpot = hero.transform.position.x + attackDistance - 2;
-		sweetSpotIndicator = Instantiate (SweetSpotIndicator, new Vector3(sweetSpot, 2, 0), Quaternion.identity);
+		sweetSpotIndicator = Instantiate (SweetSpotIndicator, new Vector3(sweetSpot, 0.4f, -.01f), Quaternion.identity);
 		sweetSpotIndicator.transform.parent = this.transform;
 
         // set above the ground
@@ -64,6 +64,10 @@ public class Thug : MonoBehaviour {
         // Execute the movement.
         this.transform.Translate(movement);
 
+		if(distanceFromHero < (this.speed*40)){
+			this.hero.beginPreemptivePunch();
+		}
+
 		if (distanceFromHero > attackDistance || distanceFromHero < minSweetSpot) {
 			stunPower = 0;
 		} else if (distanceFromHero < maxSweetSpot && distanceFromHero > minSweetSpot) {
@@ -74,7 +78,7 @@ public class Thug : MonoBehaviour {
 
 		//If we're close enough to the hero to jump
 		if(distanceFromHero <= attackDistance) {
-			if (Input.GetKeyDown (KeyCode.Space)) {
+			if (Input.GetKeyDown (KeyCode.Space) && !((this.transform.position.x + movement.x - 2) <= hero.transform.position.x)) {
 				//Debug.Log ("got here");
 				//Should tween nicely when we have time
 				this.transform.position = new Vector2 (this.hero.transform.position.x + 2, this.transform.position.y);
@@ -86,10 +90,10 @@ public class Thug : MonoBehaviour {
 			//If the thug reaches the hero without pressing space
 			if ((this.transform.position.x + movement.x - 2) <= hero.transform.position.x) {
 				this.transform.position = new Vector2 (this.hero.transform.position.x + 2, this.transform.position.y);
-				this.state = "attacking";
-				//Debug.Log (stunPower);
-
-				this.hero.beStunned (stunPower);
+				if (this.state != "attacking") {
+					float tint = 0.0f;
+					this.GetComponent<SpriteRenderer> ().color = new Color (tint, tint, tint, 1);
+				}
 			}
         }
     }
