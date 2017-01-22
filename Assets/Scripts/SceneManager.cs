@@ -15,6 +15,7 @@ public class SceneManager : MonoBehaviour {
     public HealthBar healthbar;
     public Text endMessage;
     public Text tutorialMessage;
+    public Text comboMessage;
     public const float restartTime = 3000;
     
     public bool gameHasEnded = false;
@@ -35,6 +36,7 @@ public class SceneManager : MonoBehaviour {
         }
         
         tutorialMessage = GameObject.Find("TutorialMessage").GetComponent<Text>();
+        comboMessage = GameObject.Find("ComboMessage").GetComponent<Text>();
 
         endMessage.text = "";
     }

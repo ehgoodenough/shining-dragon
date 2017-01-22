@@ -178,7 +178,6 @@ public class Thug : MonoBehaviour {
 				}
                 
                 Time.timeScale = 1f;
-                manager.hasCompletedTutorial = true;
                 
                 if(manager.hasCompletedTutorial == false) {
                     manager.tutorialMessage.text = "Now button-mash the SPACEBAR!!";
@@ -217,13 +216,14 @@ public class Thug : MonoBehaviour {
             source.PlayOneShot(attackSFXList[attackSfx]);
             animator.Play("Attack");
             
-            combo += 1;
             if(combo > 4) {
                 if(manager.hasCompletedTutorial == false) {
                     manager.hasCompletedTutorial = true;
                     manager.tutorialMessage.text = "";
                 }
             }
+            
+            manager.comboMessage.text = combo + (combo >= 10 ? "!" : "") + (combo >= 15 ? "!" : "");
             
             if(this.hero.health <= 0) {
                 this.state = "victory!";
@@ -232,7 +232,7 @@ public class Thug : MonoBehaviour {
                 // and flying away and you don't need it anymore!!
                 sweetSpotIndicator.SetActive(false);
                 
-                // animator.Play("Victory");
+                animator.Play("Victory");
             }
         }
     }
