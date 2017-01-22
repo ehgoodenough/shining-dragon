@@ -35,12 +35,12 @@ public class Thug : MonoBehaviour {
 		minSweetSpot = 3.0f;
 
 		sweetSpot = hero.transform.position.x + attackDistance - 2;
-		sweetSpotIndicator = Instantiate (SweetSpotIndicator, new Vector3(sweetSpot, 0.4f, -.01f), Quaternion.identity);
+		sweetSpotIndicator = Instantiate (SweetSpotIndicator, new Vector3(sweetSpot, -0.4f, -.01f), Quaternion.identity);
 		sweetSpotIndicator.transform.parent = this.transform;
 
         // set above the ground
         Vector3 position = transform.position;
-        position.y = 2f;
+        position.y = -0.50f;
         transform.position = position;
 
         source = GetComponent<AudioSource>();
