@@ -23,6 +23,8 @@ public class Hero : MonoBehaviour {
 	float endlagDuration;
 	float stunDuration;
 
+    float moveBackToGo;
+
 	void Start () {
 		this.manager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
 		readyDuration = 0.5f;
@@ -46,6 +48,14 @@ public class Hero : MonoBehaviour {
             return;
         }
         
+        if(moveBackToGo > 0.01f)
+        {
+            var amount = Mathf.Min(Time.deltaTime / 4, moveBackToGo);
+
+            Debug.Log($"moved back {amount}");
+            moveBackToGo -= amount;
+            transform.position = new Vector3(transform.position.x - amount, transform.position.y, transform.position.z);
+        }
 		if (this.state == "stunned") {
 			timeSinceStunned += Time.deltaTime;
 			if (timeSinceStunned >= stunDuration) {
@@ -92,6 +102,8 @@ public class Hero : MonoBehaviour {
 		this.state = "stunned";
 		this.timeSinceStunned = 0;
 		animator.Play("Block");
+        
+        moveBackToGo = stunPower / 15;
 	}
 
     public void beAttacked() {
