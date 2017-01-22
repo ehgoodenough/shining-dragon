@@ -89,6 +89,7 @@ public class Hero : MonoBehaviour {
 		this.stunDuration = stunPower;
 		this.state = "stunned";
 		this.timeSinceStunned = 0;
+		animator.Play("Block");
 	}
 
     public void beAttacked() {
