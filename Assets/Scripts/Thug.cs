@@ -216,7 +216,6 @@ public class Thug : MonoBehaviour {
             source.PlayOneShot(attackSFXList[attackSfx]);
             animator.Play("Attack");
             
-            combo += 1;
             if(combo > 4) {
                 if(manager.hasCompletedTutorial == false) {
                     manager.hasCompletedTutorial = true;
