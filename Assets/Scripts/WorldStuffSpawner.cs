@@ -34,6 +34,6 @@ public class WorldStuffSpawner : MonoBehaviour
     void SpawnEnvironment (GameObject prefab, float x)
     {
         var obj = Instantiate(prefab, new Vector2(x, prefab.transform.position.y), Quaternion.identity);
-        obj.transform.parent = transform.parent;
+        obj.transform.parent = transform;
     }
 }
