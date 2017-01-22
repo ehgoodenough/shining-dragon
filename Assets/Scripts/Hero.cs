@@ -37,11 +37,6 @@ public class Hero : MonoBehaviour {
         vector.x *= -1;
         transform.localScale = vector;
 
-        // set above the ground
-        Vector3 position = transform.position;
-        position.y = 2.15f;
-        transform.position = position;
-
         animator = GetComponent<Animator>();
         source = GetComponent<AudioSource>();
 	}
@@ -89,7 +84,7 @@ public class Hero : MonoBehaviour {
             }
 		}
 
-		Debug.Log (this.state);
+		//Debug.Log (this.state);
 	}
     
 	public void beStunned(float stunPower) {
