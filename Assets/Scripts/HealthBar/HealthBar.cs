@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour {
-    public int OriginalWidth; // TODO fetch this automatically
 
     private GameObject HealthBarHolder;
     public GameObject HPBarGlowEffectPreFab;
@@ -13,24 +12,32 @@ public class HealthBar : MonoBehaviour {
     public int DebugForcedHealth;
     public int DebugForcedHealthMax;
 
-    private int StartingX;
+    private float StartingX;
 
-    private int LastWidth;
+    
+    private int OriginalNumberOfPipes;
+    private List<GameObject> Pipes;
+    public float WidthPerPipe;
 
-    private RectTransform _RectTransform;
     public List<GlowEffect> LiveGlowEffects;
 
-    private Image _Image;
+
+    private SpriteRenderer _Sprite;
     private float BestScore;
 
 	// Use this for initialization
 	void Start () {
-        StartingX = (int)transform.position.x;
-        LastWidth = OriginalWidth;
-        _RectTransform = GetComponent<RectTransform>();
+        StartingX = transform.position.x;
         HealthBarHolder = transform.parent.gameObject;
 
-        _Image = GetComponent<Image>();
+        _Sprite = GetComponent<SpriteRenderer>();
+
+        WidthPerPipe = _Sprite.bounds.size.x / transform.localScale.x;
+        OriginalNumberOfPipes = (int) transform.localScale.x;
+
+        PreparePipes();
+
+        _Sprite.enabled = false;
     }
 
     // Update is called once per frame
@@ -41,32 +48,58 @@ public class HealthBar : MonoBehaviour {
         }
 	}
 
-    private void ImplUpdateWidth(int health, int maxHealth)
+    private void PreparePipes()
     {
-        float percScale = health / (float)maxHealth;
+        Pipes = new List<GameObject>();
+        var leftEdge = StartingX - (OriginalNumberOfPipes * WidthPerPipe) / 2.0f;
 
-        var newWidth = Mathf.FloorToInt(OriginalWidth * percScale);
-        var lossOfWidth = OriginalWidth - newWidth;
+        var spriteBase = _Sprite;
+        var childPrefab = new GameObject();
+        var childSprite = childPrefab.AddComponent<SpriteRenderer>();
+        childSprite.transform.position = transform.position;
+        childSprite.sprite = spriteBase.sprite;
+        childSprite.transform.localScale = new Vector3(1, 1);
+        childSprite.sortingOrder = spriteBase.sortingOrder;
+        childSprite.sortingLayerID = spriteBase.sortingLayerID;
+        childSprite.color = spriteBase.color;
+        childSprite.name = "Health Pipe";
 
-        var leftShift = Mathf.CeilToInt(lossOfWidth / 2.0f);
-        transform.position = new Vector3(StartingX - leftShift, transform.position.y, transform.position.z);
-        _RectTransform.sizeDelta = new Vector2(newWidth, _RectTransform.sizeDelta.y);
-
-        if(newWidth < LastWidth)
+        for (var i = 0; i < OriginalNumberOfPipes; i++)
         {
-            var shift = StartingX - (OriginalWidth / 2);
-            var leftEdge = shift + newWidth;
-            var rightEdge = shift + LastWidth - 1;
-            var totalWidth = rightEdge - leftEdge + 1;
-            
-            var subRightShift = Mathf.FloorToInt(totalWidth / 2.0f);
-            
-            SpawnGlowEffect(new Vector3(leftEdge + subRightShift, transform.position.y, 0), totalWidth);
+            var x = leftEdge + (WidthPerPipe / 2.0f) + i * WidthPerPipe;
+
+            var pipe = Instantiate(childPrefab);
+            pipe.transform.position = new Vector3(x, transform.position.y, transform.position.z);
+            pipe.transform.parent = transform;
+            Pipes.Add(pipe);
         }
 
-        _Image.color = new Color(1, percScale, percScale);
-        
-        LastWidth = newWidth;
+        Destroy(childPrefab);
+    }
+
+    private void ImplUpdateWidth(int health, int maxHealth)
+    {
+        if (health > maxHealth)
+            throw new System.Exception("More health than max health!");
+        if (health < 0)
+            throw new System.Exception("Less than 0 health!");
+        if (maxHealth != OriginalNumberOfPipes)
+            throw new System.Exception($"This healthbar only works for exactly {OriginalNumberOfPipes} pipes - the same as the original x scale on the healthbar - but you specifed {maxHealth} max health");
+        for(int i = 0; i < health; i++)
+        {
+            var pipe = Pipes[i];
+            var sprite = pipe.GetComponent<SpriteRenderer>();
+
+            sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 1.0f);
+        }
+
+        for(int i = health; i < maxHealth; i++)
+        {
+            var pipe = Pipes[i];
+            var sprite = pipe.GetComponent<SpriteRenderer>();
+
+            sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 0.0f);
+        }
     }
 
     private void SpawnGlowEffect(Vector3 position, int width)
