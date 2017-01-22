@@ -9,6 +9,8 @@ public class Thug : MonoBehaviour {
     public AudioClip screamSFX;
     public AudioClip stunAttackSFX;
     public AudioClip hitGroundSFX;
+    public AudioClip[] flySFXList = new AudioClip[5];
+    private int flySFX = 0;
 
     private AudioSource source;
     private Animator animator;
@@ -58,8 +60,9 @@ public class Thug : MonoBehaviour {
 		this.manager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
 		this.hero = manager.getHero();
         attackSfx = Random.Range(0, attackSFXList.Length);
+        flySFX = Random.Range(0, flySFXList.Length);
 
-		attackDistance = 1.4f;
+        attackDistance = 1.4f;
 		maxSweetSpot = 0.7f;
 		minSweetSpot = 0.6f;
 
@@ -250,6 +253,8 @@ public class Thug : MonoBehaviour {
         animator.Play("Death");
         
 		sweetSpotIndicator.SetActive (false);
+
+        source.PlayOneShot(flySFXList[flySFX]);
 
         // Send the thug flying!
         GetComponent<CapsuleCollider2D>().isTrigger = false;
