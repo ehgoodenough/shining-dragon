@@ -44,6 +44,10 @@ public class Hero : MonoBehaviour {
 	}
     
 	void Update() {
+        if(this.manager.gameHasEnded == true) {
+            return;
+        }
+        
 		if (this.state == "stunned") {
 			timeSinceStunned += Time.deltaTime;
 			if (timeSinceStunned >= stunDuration) {
@@ -94,6 +98,7 @@ public class Hero : MonoBehaviour {
     public void beAttacked() {
         this.health -= 1;
         if(this.health <= 0) {
+            this.health = 0;
             manager.gameEnd(true);
             Debug.Log("You Win!!");
         }
