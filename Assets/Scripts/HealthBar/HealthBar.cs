@@ -82,7 +82,6 @@ public class HealthBar : MonoBehaviour {
         if(score > BestScore)
         {
             BestScore = score;
-            Debug.Log($"New High Score! {score}");
         }
 
         LiveGlowEffects.Add(glowEffect);
