@@ -89,7 +89,7 @@ public class Hero : MonoBehaviour {
             }
 		}
 
-		//Debug.Log (this.state);
+		Debug.Log (this.state);
 	}
     
 	public void beStunned(float stunPower) {
@@ -111,6 +111,14 @@ public class Hero : MonoBehaviour {
             this.manager.healthbar.UpdateWidth(this.health, this.maxhealth);
         }
     }
+
+	public void beginPreemptivePunch() {
+		if (this.state == "walking") {
+			this.state = "ready";
+			animator.Play("Attack");
+			timeSinceReady = 0;
+		}
+	}
 
 	public void punch() {
         source.PlayOneShot(attackSFX);
