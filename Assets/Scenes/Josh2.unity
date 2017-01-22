@@ -199,9 +199,9 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!224 &224825703 stripped
+--- !u!224 &164768698 stripped
 RectTransform:
-  m_PrefabParentObject: {fileID: 224071053692844886, guid: 222afa50b1146e84bad61ae4c989548d,
+  m_PrefabParentObject: {fileID: 224186306281762954, guid: 222afa50b1146e84bad61ae4c989548d,
     type: 2}
   m_PrefabInternal: {fileID: 369681166}
 --- !u!1001 &369681166
@@ -300,6 +300,11 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224186306281762954, guid: 222afa50b1146e84bad61ae4c989548d,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 222afa50b1146e84bad61ae4c989548d, type: 2}
@@ -635,6 +640,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 34e3e59d9c008b84cbf3fbb58d824b3e, type: 2}
   m_IsPrefabParent: 0
+--- !u!224 &1405151664 stripped
+RectTransform:
+  m_PrefabParentObject: {fileID: 224677032088134816, guid: 34e3e59d9c008b84cbf3fbb58d824b3e,
+    type: 2}
+  m_PrefabInternal: {fileID: 1336178513}
 --- !u!1001 &1452592589
 Prefab:
   m_ObjectHideFlags: 0
@@ -681,11 +691,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7ec4f7f1f6db0d74ca229704d1227065, type: 2}
   m_IsPrefabParent: 0
---- !u!224 &1554453336 stripped
-RectTransform:
-  m_PrefabParentObject: {fileID: 224204706018553246, guid: 34e3e59d9c008b84cbf3fbb58d824b3e,
-    type: 2}
-  m_PrefabInternal: {fileID: 1336178513}
 --- !u!1 &1741251310
 GameObject:
   m_ObjectHideFlags: 0
@@ -770,8 +775,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 1554453336}
-  - {fileID: 224825703}
+  - {fileID: 1405151664}
+  - {fileID: 164768698}
   - {fileID: 1203059046}
   m_Father: {fileID: 0}
   m_RootOrder: 4
