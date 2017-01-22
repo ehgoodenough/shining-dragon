@@ -74,7 +74,7 @@ public class Hero : MonoBehaviour {
             
             if(this.transform.position.x >= 9)
             {
-                manager.setLose();
+                manager.gameEnd(false);
                 Debug.Log("You Lose!!");
             }
 		}
@@ -88,9 +88,9 @@ public class Hero : MonoBehaviour {
 	}
 
     public void beAttacked() {
-        this.health -= 1;
+        this.health -= 30;
         if(this.health <= 0) {
-            manager.setWin();
+            manager.gameEnd(true);
             Debug.Log("You Win!!");
         }
         

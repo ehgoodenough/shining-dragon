@@ -2,63 +2,85 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class SceneManager : MonoBehaviour {
-	// Declare prefabs (for assigning in inspector)
-	private GameObject Hero;
-	private GameObject Thug;
+    // Declare prefabs (for assigning in inspector)
+    private GameObject Hero;
+    private GameObject Thug;
 
-	// Declare the entities in our scene
-	private Thug thug;
-	private Hero hero;
+    // Declare the entities in our scene
+    private Thug thug;
+    private Hero hero;
     public HealthBar healthbar;
     public Text endMessage;
-    
-	void Awake () {
+    public const float restartTime = 3000;
+
+    private string state;
+
+    void Awake() {
         this.Hero = Resources.Load("MonkHero") as GameObject;
         this.Thug = Resources.Load("OniThug") as GameObject;
-        
-		this.createHero();
-		this.createThug();
-        
-        if(GameObject.Find("HealthBar")) {
+
+        this.createHero();
+        this.createThug();
+
+        if (GameObject.Find("HealthBar")) {
             this.healthbar = GameObject.Find("HealthBar").GetComponent<HealthBar>();
         }
 
         endMessage.text = "";
-	}
-
-	public Hero getHero() {
-		return hero;
-	}
-
-	public Thug getThug() {
-		return thug;
-	}
-
-    public void setWin()
-    {
-        endMessage.text = "You Win!";
     }
 
-    public void setLose()
-    {
-        endMessage.text = "You Lose!";
+    public Hero getHero() {
+        return hero;
     }
 
-	public Thug createThug() {
-		this.thug = Object.Instantiate(Thug, new Vector2(12f, 1.75f), Quaternion.identity).GetComponent<Thug>();
-		this.thug.gameObject.name = "Thug" + Random.Range(100, 999);
-		return this.thug;
-	}
+    public Thug getThug() {
+        return thug;
+    }
 
-	public Hero createHero() {
-		this.hero = Instantiate(Hero, new Vector2(-7.5f, 1.75f), Quaternion.identity).GetComponent<Hero>();
+    public void gameEnd(bool win)
+    {
+        print("game end");
+        if (win)
+        {
+            endMessage.text = "You Win!";
+        }
+        else
+        {
+            endMessage.text = "You Lose!";
+        }
+        StartCoroutine(ExecuteAfterTime(3));
+    }
+
+    IEnumerator ExecuteAfterTime(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        // Code to execute after the delay
+        print("execute after time");
+        Application.LoadLevel(1);
+    }
+
+    public Thug createThug() {
+        this.thug = Object.Instantiate(Thug, new Vector2(12f, 1.75f), Quaternion.identity).GetComponent<Thug>();
+        this.thug.gameObject.name = "Thug" + Random.Range(100, 999);
+        return this.thug;
+    }
+
+    public Hero createHero() {
+        this.hero = Instantiate(Hero, new Vector2(-7.5f, 1.75f), Quaternion.identity).GetComponent<Hero>();
         this.hero.gameObject.name = "Hero";
-		return this.hero;
-	}
+        return this.hero;
+    }
 
-	public void destroyThug() {
+    public void destroyThug() {
         Object.Destroy(this.thug.gameObject);
-	}
+    }
+
+    void Update()
+    {
+       
+    }
 }
