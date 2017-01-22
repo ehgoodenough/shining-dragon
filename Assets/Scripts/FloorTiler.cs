@@ -18,6 +18,7 @@ public class FloorTiler : MonoBehaviour {
         childSprite.transform.localScale = new Vector3(1, 1);
         childSprite.sortingOrder = sprite.sortingOrder;
         childSprite.sortingLayerID = sprite.sortingLayerID;
+        childSprite.color = sprite.color;
 
         GameObject child;
 
