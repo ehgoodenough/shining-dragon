@@ -25,6 +25,9 @@ public class Thug : MonoBehaviour {
 	private GameObject sweetSpotIndicator;
 	private GameObject sweetSpotIndicatorForeground;
 
+	public GameObject NiceMessage;
+	private GameObject niceMessage;
+
 	private float maxSweetSpot;
 	private float minSweetSpot;
 
@@ -149,8 +152,15 @@ public class Thug : MonoBehaviour {
 				//Debug.Log (stunPower);
 				this.hero.beStunned (stunPower);
 				//stunPower = 0;
+
+				if (stunPower > 0.85f) {
+
+					niceMessage = Instantiate (NiceMessage, sweetSpotIndicator.transform.position + new Vector3(-0.55f, 0.25f, 0), Quaternion.identity);
+					niceMessage.transform.parent = sweetSpotIndicator.transform;
+				}
                 
                 Time.timeScale = 1f;
+                manager.hasCompletedTutorial = true;
                 
                 if(manager.hasCompletedTutorial == false) {
                     manager.tutorialMessage.text = "Now button-mash the SPACEBAR!!";
