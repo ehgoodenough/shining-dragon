@@ -32,6 +32,7 @@ public class Thug : MonoBehaviour {
 	private float heroBufferXWidth = 0.4f;
     
     private float timeSinceDead = 0f;
+	private float timeSinceAlive = 0f;
 
 	private void Start() {
 		this.manager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
@@ -42,7 +43,8 @@ public class Thug : MonoBehaviour {
 		minSweetSpot = 0.6f;
 
 		sweetSpot = hero.transform.position.x + attackDistance - 0.4f;
-		sweetSpotIndicator = Instantiate (SweetSpotIndicator, new Vector3(sweetSpot, -0.795f, 0), Quaternion.identity);
+		sweetSpotIndicator = Instantiate (SweetSpotIndicator, new Vector3(sweetSpot, -0.45f, 0), Quaternion.identity);
+		//sweetSpotIndicator = Instantiate (SweetSpotIndicator, new Vector3(sweetSpot, -0.795f, 0), Quaternion.identity);
 		sweetSpotIndicator.transform.parent = this.transform;
 		sweetSpotIndicatorForeground = sweetSpotIndicator.transform.FindChild ("SweetSpotIndicatorForeground").gameObject;
 
@@ -52,13 +54,17 @@ public class Thug : MonoBehaviour {
         // body = GetComponent<Rigidbody2D>();
         // body.isKinematic = true;
         // body.detectCollisions = false;
+
+		sweetSpotIndicator.SetActive (false);
     }
 
     private void Update() {
         if(this.state == "moving") {
             this.Moving();
+			timeSinceAlive += Time.deltaTime;
         } else if(this.state == "attacking") {
             this.Attacking();
+			timeSinceAlive += Time.deltaTime;
         } else if(this.state == "dead") {
             timeSinceDead += Time.deltaTime;
             if(timeSinceDead > 0.35) {
@@ -73,6 +79,10 @@ public class Thug : MonoBehaviour {
 		sweetSpot = hero.transform.position.x + attackDistance - 0.4f;
 		float sweetSpotDiff = sweetSpot - sweetSpotIndicator.transform.position.x;
 		sweetSpotIndicator.transform.Translate (new Vector3(sweetSpotDiff, 0, 0));
+
+		if (timeSinceAlive > 1) {
+			sweetSpotIndicator.SetActive (true);
+		}
         
     }
 
@@ -92,7 +102,7 @@ public class Thug : MonoBehaviour {
 			this.hero.beginPreemptivePunch();
 		}
 
-		if (distanceFromHero > attackDistance || distanceFromHero < minSweetSpot) {
+		if (distanceFromHero < minSweetSpot) {
 			stunPower = 0;
 			//Debug.Log (stunPower);
 
@@ -119,6 +129,14 @@ public class Thug : MonoBehaviour {
 				this.state = "attacking";
 				//Debug.Log (stunPower);
 				this.hero.beStunned (stunPower);
+				stunPower = 0;
+			}
+
+			if (distanceFromHero <= minSweetSpot) {
+				if (this.state != "attacking") {
+					
+					sweetSpotIndicatorForeground.GetComponent<SpriteRenderer> ().color = new Color (1f, 0.2f, 0.2f, 1);
+				}
 			}
 
 			//If the thug reaches the hero without pressing space

@@ -27,7 +27,7 @@ public class Hero : MonoBehaviour {
 
 	void Start () {
 		this.manager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
-		readyDuration = 0.5f;
+		readyDuration = 0.6f;
 		timeSinceReady = 0;
 		state = "walking";
 		endlagDuration = 0.5f;
