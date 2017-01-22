@@ -15,6 +15,8 @@ public class SceneManager : MonoBehaviour {
     public HealthBar healthbar;
     public Text endMessage;
     public const float restartTime = 3000;
+    
+    public bool gameHasEnded = false;
 
     private string state;
 
@@ -42,16 +44,19 @@ public class SceneManager : MonoBehaviour {
 
     public void gameEnd(bool win)
     {
-        print("game end");
-        if (win)
-        {
-            endMessage.text = "You Win!";
+        if(this.gameHasEnded != true) {
+            this.gameHasEnded = true;
+            print("game end");
+            if (win)
+            {
+                endMessage.text = "You Win!";
+            }
+            else
+            {
+                endMessage.text = "You Lose!";
+            }
+            StartCoroutine(ExecuteAfterTime(3));
         }
-        else
-        {
-            endMessage.text = "You Lose!";
-        }
-        StartCoroutine(ExecuteAfterTime(3));
     }
 
     IEnumerator ExecuteAfterTime(float time)
@@ -64,7 +69,7 @@ public class SceneManager : MonoBehaviour {
     }
 
     public Thug createThug() {
-        this.thug = Object.Instantiate(Thug, new Vector2(12f, 1.75f), Quaternion.identity).GetComponent<Thug>();
+		this.thug = Object.Instantiate(Thug, new Vector2(30f + this.hero.transform.position.x, 1.75f), Quaternion.identity).GetComponent<Thug>();
         this.thug.gameObject.name = "Thug" + Random.Range(100, 999);
         return this.thug;
     }
