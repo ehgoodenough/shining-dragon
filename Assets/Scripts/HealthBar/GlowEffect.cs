@@ -27,7 +27,7 @@ public class GlowEffect : MonoBehaviour {
     public Color BestColor;
     public float BestDuration;
     
-    private Image _Image;
+    private SpriteRenderer _Sprite;
 
     private HealthBar _HealthBar;
 
@@ -35,13 +35,13 @@ public class GlowEffect : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        _Image = GetComponent<Image>();
+        _Sprite = GetComponent<SpriteRenderer>();
         _HealthBar = GameObject.Find("HealthBar").GetComponent<HealthBar>();
 
         if (ComboMultiplier < 20)
         {
             RealGlowDuration = GlowDuration;
-            BaseColor = _Image.color;
+            BaseColor = _Sprite.color;
         }
         else if (ComboMultiplier < 50)
         {
@@ -61,8 +61,7 @@ public class GlowEffect : MonoBehaviour {
 
         RealGlowDurationRemaining = RealGlowDuration;
         var yScale = 1.0f + ComboMultiplier / 50.0f;
-
-        transform.localScale = new Vector3(1, yScale, 1);
+        transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * yScale, transform.localScale.z);
     }
 	
 	// Update is called once per frame
@@ -78,7 +77,7 @@ public class GlowEffect : MonoBehaviour {
             var current = RealGlowDuration - RealGlowDurationRemaining;
             var percToDone = current / RealGlowDuration;
 
-             _Image.color = ColorAlphaFade(BaseColor, percToDone);
+            _Sprite.color = ColorAlphaFade(BaseColor, percToDone);
         }
 	}
 
