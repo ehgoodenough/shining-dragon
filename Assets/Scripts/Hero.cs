@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class Hero : MonoBehaviour {
     public AudioClip attackSFX;
     
-    private int maxhealth = 50;
-    private int health = 50;
+    public int maxhealth = 50;
+    public int health = 50;
     
 	private string state = "unset";
 	private SceneManager manager;
