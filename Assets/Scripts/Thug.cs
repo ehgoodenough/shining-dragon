@@ -32,6 +32,12 @@ public class Thug : MonoBehaviour {
 	public GameObject NiceMessage;
 	private GameObject niceMessage;
 
+	public GameObject GoodMessage;
+	private GameObject goodMessage;
+
+	public GameObject MehMessage;
+	private GameObject mehMessage;
+
 	private float maxSweetSpot;
 	private float minSweetSpot;
 
@@ -85,6 +91,8 @@ public class Thug : MonoBehaviour {
             }
             return;
         } else if(this.state == "very dead") {
+            return;
+        } else if(this.state == "victory!") {
             return;
         }
         
@@ -159,8 +167,14 @@ public class Thug : MonoBehaviour {
 
 				if (stunPower > 0.85f) {
 
-					niceMessage = Instantiate (NiceMessage, sweetSpotIndicator.transform.position + new Vector3(-0.55f, 0.25f, 0), Quaternion.identity);
+					niceMessage = Instantiate (NiceMessage, sweetSpotIndicator.transform.position + new Vector3 (-0.55f, 0.3f, 0), Quaternion.identity);
 					niceMessage.transform.parent = sweetSpotIndicator.transform;
+				} else if (stunPower > 0.6) {
+					goodMessage = Instantiate (GoodMessage, sweetSpotIndicator.transform.position + new Vector3 (-0.55f, 0.3f, 0), Quaternion.identity);
+					goodMessage.transform.parent = sweetSpotIndicator.transform;
+				} else {
+					mehMessage = Instantiate (MehMessage, sweetSpotIndicator.transform.position + new Vector3 (-0.55f, 0.3f, 0), Quaternion.identity);
+					mehMessage.transform.parent = sweetSpotIndicator.transform;
 				}
                 
                 Time.timeScale = 1f;
@@ -197,16 +211,28 @@ public class Thug : MonoBehaviour {
 
         if(Input.GetButtonDown("Action")) {
             this.hero.beAttacked();
+            
             source.pitch = 1 + combo * PITCH_CHANGE;
             combo++;
             source.PlayOneShot(attackSFXList[attackSfx]);
             animator.Play("Attack");
             
+            combo += 1;
             if(combo > 4) {
                 if(manager.hasCompletedTutorial == false) {
                     manager.hasCompletedTutorial = true;
                     manager.tutorialMessage.text = "";
                 }
+            }
+            
+            if(this.hero.health <= 0) {
+                this.state = "victory!";
+                
+                // remove the indicator, cuz the hero is dead
+                // and flying away and you don't need it anymore!!
+                sweetSpotIndicator.SetActive(false);
+                
+                // animator.Play("Victory");
             }
         }
     }
