@@ -30,7 +30,7 @@ public class Thug : MonoBehaviour {
 
 	private float stunPower = 0;
 
-	private float heroBufferXWidth = 0.4f;
+	private float heroBufferXWidth = 0.3f;
     
     private float timeSinceDead = 0f;
 	private float timeSinceAlive = 0f;
@@ -67,7 +67,7 @@ public class Thug : MonoBehaviour {
         } else if(this.state == "dead") {
             timeSinceDead += Time.deltaTime;
             if(timeSinceDead > 0.35) {
-                manager.createThug();
+				manager.createThug(this.stunPower);
                 this.state = "very dead";
             }
             return;
@@ -105,12 +105,16 @@ public class Thug : MonoBehaviour {
 			//Debug.Log (stunPower);
 
 		} else if (distanceFromHero < maxSweetSpot && distanceFromHero > minSweetSpot) {
-			stunPower = 1;
+			stunPower = 1f;
 			//Debug.Log (stunPower);
 
 		} else {
 			stunPower = 1 / ((distanceFromHero - (maxSweetSpot - 1))*(distanceFromHero - (maxSweetSpot - 1)));
 			//Debug.Log (stunPower);
+		}
+
+		if (stunPower > 0.9f) {
+			stunPower = 0.9f;
 		}
 
 		float currentXPos =  sweetSpotIndicatorForeground.transform.position.x;
@@ -138,7 +142,7 @@ public class Thug : MonoBehaviour {
                 animator.Play("AttackIdle");
 				//Debug.Log (stunPower);
 				this.hero.beStunned (stunPower);
-				stunPower = 0;
+				//stunPower = 0;
                 
                 Time.timeScale = 1f;
                 manager.hasCompletedTutorial = true;
@@ -195,4 +199,8 @@ public class Thug : MonoBehaviour {
         render.sortingOrder -= 1;
         render.color = new Color(255, 255, 255, 1);
     }
+
+	public void modifySpeed(float speedModifier) {
+		this.speed = this.speed * 0.8f + (this.speed * 0.6f * speedModifier);
+	}
 }
