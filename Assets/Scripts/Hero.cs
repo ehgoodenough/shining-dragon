@@ -51,11 +51,11 @@ public class Hero : MonoBehaviour {
         if(moveBackToGo > 0.01f)
         {
             var amount = Mathf.Min(Time.deltaTime / 4, moveBackToGo);
-
-            Debug.Log($"moved back {amount}");
+            
             moveBackToGo -= amount;
             transform.position = new Vector3(transform.position.x - amount, transform.position.y, transform.position.z);
         }
+
 		if (this.state == "stunned") {
 			timeSinceStunned += Time.deltaTime;
 			if (timeSinceStunned >= stunDuration) {
