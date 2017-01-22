@@ -152,6 +152,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackSFX: {fileID: 8300000, guid: 6f1799a02a722cd46bb8c5383bc53fea, type: 3}
+  maxhealth: 72
+  health: 72
 --- !u!212 &212531195439994140
 SpriteRenderer:
   m_ObjectHideFlags: 1

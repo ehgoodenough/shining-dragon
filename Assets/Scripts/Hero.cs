@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class Hero : MonoBehaviour {
     public AudioClip attackSFX;
     
-    private int maxhealth = 50;
-    private int health = 50;
+    public int maxhealth = 50;
+    public int health = 50;
     
 	private string state = "unset";
 	private SceneManager manager;
@@ -87,7 +87,7 @@ public class Hero : MonoBehaviour {
 		if (this.state == "walking") {
 			this.transform.Translate(new Vector2 (0.01f, 0));
             
-            if(this.transform.position.x >= 9)
+            if(this.transform.position.x >= 18)
             {
                 manager.gameEnd(false);
                 Debug.Log("You Lose!!");
