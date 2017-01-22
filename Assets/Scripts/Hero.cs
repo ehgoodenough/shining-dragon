@@ -4,12 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Hero : MonoBehaviour {
+    public AudioClip attackSFX;
     
     private int maxhealth = 50;
     private int health = 50;
     
 	private string state = "unset";
 	private SceneManager manager;
+    private AudioSource source;
 
     private Animator animator;
 
@@ -41,6 +43,7 @@ public class Hero : MonoBehaviour {
         transform.position = position;
 
         animator = GetComponent<Animator>();
+        source = GetComponent<AudioSource>();
 	}
     
 	void Update() {
@@ -101,6 +104,7 @@ public class Hero : MonoBehaviour {
     }
 
 	public void punch() {
+        source.PlayOneShot(attackSFX);
 		this.state = "endlag";
 		Thug thug = manager.getThug ();
 		thug.tryToDie ();
