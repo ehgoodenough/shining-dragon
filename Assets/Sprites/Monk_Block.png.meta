@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: b7a78220ac8c3495ba52157382c84dd6
-timeCreated: 1485049897
+timeCreated: 1485114954
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -76,11 +76,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 3
-        y: 3
-        width: 27
-        height: 41
+        y: 17
+        width: 28
+        height: 57
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -88,12 +88,12 @@ TextureImporter:
       name: Monk_Block_1
       rect:
         serializedVersion: 2
-        x: 35
-        y: 3
-        width: 35
-        height: 43
+        x: 34
+        y: 17
+        width: 36
+        height: 57
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

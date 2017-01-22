@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 9a77235224c094c9c9ae014e7c2b0554
+timeCreated: 1485114855
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: BasicHandwriting
+  fontNames:
+  - BasicHandwriting
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

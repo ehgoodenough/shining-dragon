@@ -27,7 +27,7 @@ public class Hero : MonoBehaviour {
 
 	void Start () {
 		this.manager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
-		readyDuration = 0.5f;
+		readyDuration = 0.6f;
 		timeSinceReady = 0;
 		state = "walking";
 		endlagDuration = 0.5f;
@@ -87,7 +87,7 @@ public class Hero : MonoBehaviour {
 		if (this.state == "walking") {
 			this.transform.Translate(new Vector2 (0.01f, 0));
             
-            if(this.transform.position.x >= 9)
+            if(this.transform.position.x >= 13)
             {
                 manager.gameEnd(false);
                 Debug.Log("You Lose!!");
