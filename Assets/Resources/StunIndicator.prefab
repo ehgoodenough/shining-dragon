@@ -36,7 +36,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4336019082164390}
   m_Layer: 0
-  m_Name: SweetSpotIndicator
+  m_Name: StunIndicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
