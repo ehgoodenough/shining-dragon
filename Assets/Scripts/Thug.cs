@@ -56,7 +56,6 @@ public class Thug : MonoBehaviour {
         // Normalize the delta.
         float delta = Time.deltaTime / (1f / 60f);
         
-		float distanceFromSweetSpot = this.transform.position.x - sweetSpot;
 		float distanceFromHero = this.transform.position.x - hero.transform.position.x;
 
         // Calculate the distance to move.
@@ -76,19 +75,19 @@ public class Thug : MonoBehaviour {
 		//If we're close enough to the hero to jump
 		if(distanceFromHero <= attackDistance) {
 			if (Input.GetKeyDown (KeyCode.Space)) {
-				Debug.Log ("got here");
+				//Debug.Log ("got here");
 				//Should tween nicely when we have time
-				this.transform.position = new Vector2 (this.hero.transform.position.x + this.transform.localScale.x, this.transform.position.y);
+				this.transform.position = new Vector2 (this.hero.transform.position.x + this.transform.localScale.x/5, this.transform.position.y);
 				this.state = "attacking";
-				Debug.Log (stunPower);
+				//Debug.Log (stunPower);
 				this.hero.beStunned (stunPower);
 			}
 
 			//If the thug reaches the hero without pressing space
-			if ((this.transform.position.x + movement.x - this.transform.localScale.x) <= hero.transform.position.x) {
-				this.transform.position = new Vector2 (this.hero.transform.position.x + this.transform.localScale.x, this.transform.position.y);
+			if ((this.transform.position.x + movement.x - this.transform.localScale.x/5) <= hero.transform.position.x) {
+				this.transform.position = new Vector2 (this.hero.transform.position.x + this.transform.localScale.x/5, this.transform.position.y);
 				this.state = "attacking";
-				Debug.Log (stunPower);
+				//Debug.Log (stunPower);
 
 				this.hero.beStunned (stunPower);
 			}
