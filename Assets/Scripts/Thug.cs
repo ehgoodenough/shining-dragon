@@ -79,7 +79,7 @@ public class Thug : MonoBehaviour {
 		float sweetSpotDiff = sweetSpot - sweetSpotIndicator.transform.position.x;
 		sweetSpotIndicator.transform.Translate (new Vector3(sweetSpotDiff, 0, 0));
 
-		if (timeSinceAlive > 1) {
+		if (timeSinceAlive > 0.6f) {
 			sweetSpotIndicator.SetActive (true);
 		}
     }
@@ -123,13 +123,18 @@ public class Thug : MonoBehaviour {
             if(manager.hasCompletedTutorial == false) {
                 Time.timeScale = 0.1f;
             }
-            
+			if (distanceFromHero <= minSweetSpot) {
+				if (this.state != "attacking") {
+
+					sweetSpotIndicatorForeground.GetComponent<SpriteRenderer> ().color = new Color (1f, 0.2f, 0.2f, 1);
+				}
+			}
+
 			if (Input.GetKeyDown (KeyCode.Space) && !((this.transform.position.x + movement.x - heroBufferXWidth) <= hero.transform.position.x)) {
 				//Debug.Log ("got here");
 				//Should tween nicely when we have time
 				this.transform.position = new Vector2 (this.hero.transform.position.x + heroBufferXWidth, this.transform.position.y);
-				this.state = "attacking";
-                animator.Play("Attack");
+                this.state = "attacking";  
 				//Debug.Log (stunPower);
 				this.hero.beStunned (stunPower);
 				stunPower = 0;
@@ -161,6 +166,7 @@ public class Thug : MonoBehaviour {
         if(Input.GetButtonDown("Action")) {
             this.hero.beAttacked();
             source.PlayOneShot(attackSFX);
+            animator.Play("Attack");
         }
     }
     
