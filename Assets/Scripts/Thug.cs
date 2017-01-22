@@ -80,7 +80,7 @@ public class Thug : MonoBehaviour {
 		float sweetSpotDiff = sweetSpot - sweetSpotIndicator.transform.position.x;
 		sweetSpotIndicator.transform.Translate (new Vector3(sweetSpotDiff, 0, 0));
 
-		if (timeSinceAlive > 1) {
+		if (timeSinceAlive > 0.6f) {
 			sweetSpotIndicator.SetActive (true);
 		}
         
