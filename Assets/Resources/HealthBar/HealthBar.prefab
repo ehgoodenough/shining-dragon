@@ -41,7 +41,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.0054065795, g: 0.7352941, b: 0.19165362, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -68,12 +68,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OriginalWidth: 250
-  HealthBarHolder: {fileID: 0}
   HPBarGlowEffectPreFab: {fileID: 1656046730565742, guid: 56e9b8b5303648b4b84226b98d5143b5,
     type: 2}
   DebugHealthBar: 0
   DebugForcedHealth: 50
   DebugForcedHealthMax: 100
+  LiveGlowEffects: []
 --- !u!222 &222047557279368698
 CanvasRenderer:
   m_ObjectHideFlags: 1
