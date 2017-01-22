@@ -70,6 +70,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b024c2ff23d3b4a5dbd3707be2fd4160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SweetSpotIndicator: {fileID: 1139551320605738, guid: 4c48b90a139f24f9b8e4635a07fdfe5a,
+    type: 2}
 --- !u!212 &212197997797791112
 SpriteRenderer:
   m_ObjectHideFlags: 1
