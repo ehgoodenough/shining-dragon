@@ -152,6 +152,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackSFX: {fileID: 8300000, guid: 6f1799a02a722cd46bb8c5383bc53fea, type: 3}
+  hitSFXList:
+  - {fileID: 8300000, guid: 6b933f27224c3114b98027c79a1d9561, type: 3}
+  - {fileID: 8300000, guid: f0f48cb5de3e1b743a68b0e266b9b4eb, type: 3}
   maxhealth: 72
   health: 72
 --- !u!212 &212531195439994140
