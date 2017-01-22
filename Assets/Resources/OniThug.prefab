@@ -176,6 +176,11 @@ MonoBehaviour:
   hitGroundSFX: {fileID: 0}
   SweetSpotIndicator: {fileID: 1529318538645846, guid: 4c48b90a139f24f9b8e4635a07fdfe5a,
     type: 2}
+  NiceMessage: {fileID: 1514222060033142, guid: a3a5d1ce2b1ca429d9e28ff1708b7e43,
+    type: 2}
+  GoodMessage: {fileID: 1980459130211650, guid: 08d3ff25ee01c4894b47f754c0d11bab,
+    type: 2}
+  MehMessage: {fileID: 1174750320949640, guid: 1e90cef11b4b14812bd44f3abdc1b4d8, type: 2}
 --- !u!212 &212520685000493466
 SpriteRenderer:
   m_ObjectHideFlags: 1
