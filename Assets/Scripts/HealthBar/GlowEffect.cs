@@ -34,12 +34,14 @@ public class GlowEffect : MonoBehaviour {
 
     private Image _Image;
 
+    private HealthBar _HealthBar;
+
 	// Use this for initialization
 	void Start () {
         GlowDurationRemaining = GlowDuration;
         _Image = GetComponent<Image>();
-
-	}
+        _HealthBar = GameObject.Find("HealthBar").GetComponent<HealthBar>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -47,29 +49,39 @@ public class GlowEffect : MonoBehaviour {
         
         if(GlowDurationRemaining <= 0)
         {
+            _HealthBar.LiveGlowEffects.Remove(this);
             Destroy(gameObject);
         }else
         {
-            var percToDone = (GlowDuration - GlowDurationRemaining) / GlowDuration;
+            var current = GlowDuration - GlowDurationRemaining;
+            var percToDone = current / GlowDuration;
 
-            if (ColorModifier == 0 || ColorGlowSpeed == 0)
+            if (GlowDuration <= 0.5f)
                 _Image.color = DecideColorAlphaFade(percToDone);
             else
-                _Image.color = DecideColorAlternateFade(percToDone, 0, GlowDuration, WorstColor, BestColor);
+            {
+                _Image.color = DecideColorAlternateFade(current, 0, GlowDuration, WorstColor, BestColor);
+                Debug.Log($"color = {_Image.color}");
+            }
+                
         }
 	}
 
-    Color DecideColorAlphaFade(float progress)
+    Color DecideColorAlphaFade(float percProgress)
     {
-        return new Color(_Image.color.r, _Image.color.g, _Image.color.b, 1.0f - progress);
+        return new Color(_Image.color.r, _Image.color.g, _Image.color.b, 1.0f - percProgress);
     }
 
-    Color DecideColorAlternateFade(float progress, float initial, float final, Color color1, Color color2)
+    Color DecideColorAlternateFade(float current, float initial, float final, Color color1, Color color2)
     {
-        var sine = Mathf.Sin(initial * ColorGlowSpeed);
+        Debug.Log($"Fade({current}, {current}, {final}, {color1}, {color2})");
+        var sine = Mathf.Sin(current * ColorGlowSpeed);
 
         return new Color(
-            
+            color1.r + (color2.r - color1.r) * sine,
+            color1.g + (color2.g - color1.g) * sine,
+            color1.b + (color2.b - color1.b) * sine,
+            color1.a + (color2.a - color1.a) * sine
             );
     }
 }

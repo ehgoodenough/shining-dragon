@@ -17,6 +17,7 @@ public class HealthBar : MonoBehaviour {
     private int LastWidth;
 
     private RectTransform _RectTransform;
+    public List<GlowEffect> LiveGlowEffects;
 
 	// Use this for initialization
 	void Start () {
@@ -48,10 +49,10 @@ public class HealthBar : MonoBehaviour {
         {
             var shift = StartingX - (OriginalWidth / 2);
             var leftEdge = shift + newWidth;
-            var rightEdge = shift + LastWidth;
+            var rightEdge = shift + LastWidth - 1;
             var totalWidth = rightEdge - leftEdge + 1;
-
-            var subRightShift = Mathf.CeilToInt(totalWidth / 2.0f);
+            
+            var subRightShift = Mathf.FloorToInt(totalWidth / 2.0f);
             
             SpawnGlowEffect(new Vector3(leftEdge + subRightShift, transform.position.y, 0), totalWidth);
         }
@@ -61,12 +62,21 @@ public class HealthBar : MonoBehaviour {
 
     private void SpawnGlowEffect(Vector3 position, int width)
     {
-        var glowEffect = Instantiate(HPBarGlowEffectPreFab, position, Quaternion.identity);
-        glowEffect.name = $"Glow Effect {position.x}";
-        glowEffect.transform.SetParent(HealthBarHolder.transform, true);
+        var glowEffectGameObj = Instantiate(HPBarGlowEffectPreFab, position, Quaternion.identity);
+        glowEffectGameObj.name = $"Glow Effect {position.x}";
+        glowEffectGameObj.transform.SetParent(HealthBarHolder.transform, true);
 
-        var rectTrans = glowEffect.GetComponent<RectTransform>();
+        var rectTrans = glowEffectGameObj.GetComponent<RectTransform>();
         rectTrans.sizeDelta = new Vector2(width, rectTrans.sizeDelta.y);
+
+        var glowEffect = glowEffectGameObj.GetComponent<GlowEffect>();
+
+        var duration = glowEffect.GlowDuration + 0.2f * LiveGlowEffects.Count;
+
+        glowEffect.GlowDuration = duration;
+        glowEffect.GlowDurationRemaining = duration;
+
+        LiveGlowEffects.Add(glowEffect);
     }
 
     public void UpdateWidth (int health, int maxHealth)
