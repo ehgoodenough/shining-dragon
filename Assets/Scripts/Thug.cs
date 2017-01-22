@@ -8,7 +8,7 @@ public class Thug : MonoBehaviour {
 
     private AudioSource source;
 
-    private float speed = 0.25f;
+    private float speed = 0.05f;
     private string state = "moving";
     
     private float attackDistance;
@@ -26,22 +26,19 @@ public class Thug : MonoBehaviour {
 
 	private float stunPower = 0;
 
+	private float heroBufferXWidth = 0.4f;
+
 	private void Start() {
 		this.manager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
 		this.hero = manager.getHero();
 
-		attackDistance = 7.0f;
-		maxSweetSpot = 3.4f;
-		minSweetSpot = 3.0f;
+		attackDistance = 1.4f;
+		maxSweetSpot = 0.7f;
+		minSweetSpot = 0.6f;
 
-		sweetSpot = hero.transform.position.x + attackDistance - 2;
-		sweetSpotIndicator = Instantiate (SweetSpotIndicator, new Vector3(sweetSpot, -0.4f, -.01f), Quaternion.identity);
+		sweetSpot = hero.transform.position.x + attackDistance - 0.4f;
+		sweetSpotIndicator = Instantiate (SweetSpotIndicator, new Vector3(sweetSpot, -0.78f, 0), Quaternion.identity);
 		sweetSpotIndicator.transform.parent = this.transform;
-
-        // set above the ground
-        Vector3 position = transform.position;
-        position.y = -0.50f;
-        transform.position = position;
 
         source = GetComponent<AudioSource>();
     }
@@ -52,7 +49,7 @@ public class Thug : MonoBehaviour {
         } else if(this.state == "attacking") {
             this.Attacking();
         }
-		sweetSpot = hero.transform.position.x + attackDistance - 2;
+		sweetSpot = hero.transform.position.x + attackDistance - 0.4f;
 		float sweetSpotDiff = sweetSpot - sweetSpotIndicator.transform.position.x;
 		sweetSpotIndicator.transform.Translate (new Vector3(sweetSpotDiff, 0, 0));
     }
@@ -75,26 +72,32 @@ public class Thug : MonoBehaviour {
 
 		if (distanceFromHero > attackDistance || distanceFromHero < minSweetSpot) {
 			stunPower = 0;
+			Debug.Log (stunPower);
+
 		} else if (distanceFromHero < maxSweetSpot && distanceFromHero > minSweetSpot) {
 			stunPower = 1;
+			Debug.Log (stunPower);
+
 		} else {
 			stunPower = 1 / ((distanceFromHero - (maxSweetSpot - 1))*(distanceFromHero - (maxSweetSpot - 1)));
+			Debug.Log (stunPower);
+
 		}
 
 		//If we're close enough to the hero to jump
 		if(distanceFromHero <= attackDistance) {
-			if (Input.GetKeyDown (KeyCode.Space) && !((this.transform.position.x + movement.x - 2) <= hero.transform.position.x)) {
+			if (Input.GetKeyDown (KeyCode.Space) && !((this.transform.position.x + movement.x - heroBufferXWidth) <= hero.transform.position.x)) {
 				//Debug.Log ("got here");
 				//Should tween nicely when we have time
-				this.transform.position = new Vector2 (this.hero.transform.position.x + 2, this.transform.position.y);
+				this.transform.position = new Vector2 (this.hero.transform.position.x + heroBufferXWidth, this.transform.position.y);
 				this.state = "attacking";
 				//Debug.Log (stunPower);
 				this.hero.beStunned (stunPower);
 			}
 
 			//If the thug reaches the hero without pressing space
-			if ((this.transform.position.x + movement.x - 2) <= hero.transform.position.x) {
-				this.transform.position = new Vector2 (this.hero.transform.position.x + 2, this.transform.position.y);
+			if ((this.transform.position.x + movement.x - heroBufferXWidth) <= hero.transform.position.x) {
+				this.transform.position = new Vector2 (this.hero.transform.position.x + heroBufferXWidth, this.transform.position.y);
 				if (this.state != "attacking") {
 					float tint = 0.0f;
 					this.GetComponent<SpriteRenderer> ().color = new Color (tint, tint, tint, 1);
