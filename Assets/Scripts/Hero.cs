@@ -140,16 +140,16 @@ public class Hero : MonoBehaviour {
 	}
 
 	public void punch() {
-        source.PlayOneShot(attackSFX);
+        //source.PlayOneShot(attackSFX);
 		this.state = "endlag";
 		Thug thug = manager.getThug ();
 		thug.tryToDie ();
 		timeInEndlag = 0;
-        
-        Time.timeScale = 1f;
-        manager.tutorialMessage.text = "";
 
         VOSFX = Random.Range(0, VOSFXList.Length);
         source.PlayOneShot(VOSFXList[VOSFX]);
+
+        Time.timeScale = 1f;
+        manager.tutorialMessage.text = "";
 	}
 }
