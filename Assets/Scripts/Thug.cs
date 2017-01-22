@@ -159,6 +159,8 @@ public class Thug : MonoBehaviour {
         // Set the animation.
         animator.Play("Death");
         
+		sweetSpotIndicator.SetActive (false);
+
         // Send the thug flying!
         GetComponent<CapsuleCollider2D>().isTrigger = false;
         body = gameObject.AddComponent<Rigidbody2D>() as Rigidbody2D;
