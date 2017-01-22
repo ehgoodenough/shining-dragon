@@ -25,6 +25,9 @@ public class Thug : MonoBehaviour {
 	private GameObject sweetSpotIndicator;
 	private GameObject sweetSpotIndicatorForeground;
 
+	public GameObject NiceMessage;
+	private GameObject niceMessage;
+
 	private float maxSweetSpot;
 	private float minSweetSpot;
 
@@ -149,6 +152,12 @@ public class Thug : MonoBehaviour {
                 
                 Time.timeScale = 1f;
                 manager.hasCompletedTutorial = true;
+
+				if (stunPower > 0.85f) {
+					
+					niceMessage = Instantiate (NiceMessage, sweetSpotIndicator.transform.position + new Vector3(-0.55f, 0.25f, 0), Quaternion.identity);
+					niceMessage.transform.parent = sweetSpotIndicator.transform;
+				}
 			}
 
 			if (distanceFromHero <= minSweetSpot) {
