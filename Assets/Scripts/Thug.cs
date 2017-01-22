@@ -28,6 +28,12 @@ public class Thug : MonoBehaviour {
 	public GameObject NiceMessage;
 	private GameObject niceMessage;
 
+	public GameObject GoodMessage;
+	private GameObject goodMessage;
+
+	public GameObject MehMessage;
+	private GameObject mehMessage;
+
 	private float maxSweetSpot;
 	private float minSweetSpot;
 
@@ -153,8 +159,14 @@ public class Thug : MonoBehaviour {
 
 				if (stunPower > 0.85f) {
 
-					niceMessage = Instantiate (NiceMessage, sweetSpotIndicator.transform.position + new Vector3(-0.55f, 0.25f, 0), Quaternion.identity);
+					niceMessage = Instantiate (NiceMessage, sweetSpotIndicator.transform.position + new Vector3 (-0.55f, 0.3f, 0), Quaternion.identity);
 					niceMessage.transform.parent = sweetSpotIndicator.transform;
+				} else if (stunPower > 0.6) {
+					goodMessage = Instantiate (GoodMessage, sweetSpotIndicator.transform.position + new Vector3 (-0.55f, 0.3f, 0), Quaternion.identity);
+					goodMessage.transform.parent = sweetSpotIndicator.transform;
+				} else {
+					mehMessage = Instantiate (MehMessage, sweetSpotIndicator.transform.position + new Vector3 (-0.55f, 0.3f, 0), Quaternion.identity);
+					mehMessage.transform.parent = sweetSpotIndicator.transform;
 				}
                 
                 Time.timeScale = 1f;
