@@ -28,8 +28,6 @@ public class Thug : MonoBehaviour {
 	private float stunPower = 0;
 
 	private float heroBufferXWidth = 0.4f;
-    
-    private Rigidbody2D body;
 
 	private void Start() {
 		this.manager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
@@ -46,7 +44,9 @@ public class Thug : MonoBehaviour {
 
         source = GetComponent<AudioSource>();
         
-        body = GetComponent<Rigidbody2D>();
+        // body = GetComponent<Rigidbody2D>();
+        // body.isKinematic = true;
+        // body.detectCollisions = false;
     }
 
     private void Update() {
@@ -54,10 +54,14 @@ public class Thug : MonoBehaviour {
             this.Moving();
         } else if(this.state == "attacking") {
             this.Attacking();
+        } else if(this.state == "dead") {
+            return;
         }
+        
 		sweetSpot = hero.transform.position.x + attackDistance - 0.4f;
 		float sweetSpotDiff = sweetSpot - sweetSpotIndicator.transform.position.x;
 		sweetSpotIndicator.transform.Translate (new Vector3(sweetSpotDiff, 0, 0));
+        
     }
 
     private void Moving() {
@@ -114,11 +118,6 @@ public class Thug : MonoBehaviour {
 				}
 			}
         }
-        
-        // Vector3 cameraMovement = new Vector3(0f, 0f, 0f);
-        // cameraMovement.x = (this.transform.position.x - 1f - Camera.main.transform.position.x) / 16;
-        // Camera.main.transform.Translate(cameraMovement);
-        Camera.main.transform.position = transform.position;
     }
 
     private void Attacking() {
@@ -136,13 +135,19 @@ public class Thug : MonoBehaviour {
     private void beAttacked() {
         // The thugs are so weak, they
         // are killed in just in one hit!!
-		manager.destroyThug();
+		// manager.destroyThug();
         
         // Create a new thug to
         // replace this thug.
         manager.createThug();
         
-        // TODO: Don't destroy the thug, but instead
-        // send it flying and sprawling in a heep.
+        state = "dead";
+        
+        // Send the thug flying!
+        GetComponent<CapsuleCollider2D>().isTrigger = false;
+        Rigidbody2D body = gameObject.AddComponent<Rigidbody2D>() as Rigidbody2D;
+        body.isKinematic = false;
+        body.AddForce(new Vector2(5f, 5f), ForceMode2D.Impulse);
+        body.AddTorque(-0.5f, ForceMode2D.Impulse);
     }
 }
