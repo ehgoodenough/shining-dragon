@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79476c08ff8813644b14a16154e01630, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OriginalWidth: 250
+  OriginalWidth: 220
   HPBarGlowEffectPreFab: {fileID: 1656046730565742, guid: 56e9b8b5303648b4b84226b98d5143b5,
     type: 2}
   DebugHealthBar: 0
@@ -96,5 +96,5 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 180, y: -56}
-  m_SizeDelta: {x: 250, y: 22}
+  m_SizeDelta: {x: 220, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
