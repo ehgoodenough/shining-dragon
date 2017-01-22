@@ -125,6 +125,7 @@ public class Thug : MonoBehaviour {
 		if(distanceFromHero <= attackDistance) {
             if(manager.hasCompletedTutorial == false) {
                 Time.timeScale = 0.1f;
+                manager.tutorialMessage.text = "Hit SPACEBAR to attack!!";
             }
 			if (distanceFromHero <= minSweetSpot) {
 				if (this.state != "attacking") {
@@ -144,12 +145,16 @@ public class Thug : MonoBehaviour {
 				stunPower = 0;
                 
                 Time.timeScale = 1f;
-                manager.hasCompletedTutorial = true;
+                manager.tutorialMessage.text = "Now button-mash the SPACEBAR!!";
 			}
 
 			if (distanceFromHero <= minSweetSpot) {
 				if (this.state != "attacking") {
 					
+                    if(manager.hasCompletedTutorial == false) {
+                        manager.tutorialMessage.text = "Oh no!! Too late :(";
+                    }
+                    
 					sweetSpotIndicatorForeground.GetComponent<SpriteRenderer> ().color = new Color (1f, 0.2f, 0.2f, 1);
                     render.color = new Color(0.5f, 0.5f, 0.5f, 1f);
 				}
@@ -173,6 +178,13 @@ public class Thug : MonoBehaviour {
             combo++;
             source.PlayOneShot(attackSFX);
             animator.Play("Attack");
+            
+            if(combo > 4) {
+                if(manager.hasCompletedTutorial == false) {
+                    manager.hasCompletedTutorial = true;
+                    manager.tutorialMessage.text = "";
+                }
+            }
         }
     }
     

@@ -135,5 +135,6 @@ public class Hero : MonoBehaviour {
 		timeInEndlag = 0;
         
         Time.timeScale = 1f;
+        manager.tutorialMessage.text = "";
 	}
 }
