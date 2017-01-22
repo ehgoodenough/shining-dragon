@@ -69,7 +69,7 @@ public class SceneManager : MonoBehaviour {
     }
 
     public Thug createThug() {
-        this.thug = Object.Instantiate(Thug, new Vector2(12f, 1.75f), Quaternion.identity).GetComponent<Thug>();
+		this.thug = Object.Instantiate(Thug, new Vector2(30f + this.hero.transform.position.x, 1.75f), Quaternion.identity).GetComponent<Thug>();
         this.thug.gameObject.name = "Thug" + Random.Range(100, 999);
         return this.thug;
     }
