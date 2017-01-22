@@ -26,9 +26,33 @@ public class HealthBar : MonoBehaviour {
     private SpriteRenderer _Sprite;
     private float BestScore;
 
+    public float ShakeTimeRemaining;
+    public float ShakePower;
+
+    private Vector3 InitialPosition;
+    private Vector3? CurrentPositionTarget;
+    private float CurrentPositionTargetSpeed;
+    private bool PositionAtInitial;
+
+
+    private float InitialRotationY;
+    private float? CurrentRotationTargetY;
+    private float CurrentRotationTargetSpeed;
+    private bool RotationAtInitial;
+
 	// Use this for initialization
 	void Start () {
         LiveGlowEffects = new List<GlowEffect>();
+
+        ShakeTimeRemaining = 0;
+        ShakePower = 0;
+        InitialPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        InitialRotationY = transform.rotation.y;
+        CurrentPositionTarget = null;
+        CurrentRotationTargetY = null;
+
+        PositionAtInitial = true;
+        RotationAtInitial = true;
 
         StartingX = transform.position.x;
         HealthBarHolder = transform.parent.gameObject;
@@ -49,6 +73,83 @@ public class HealthBar : MonoBehaviour {
         if(DebugHealthBar)
         {
             ImplUpdateWidth(DebugForcedHealth, DebugForcedHealthMax);
+        }
+
+        if(CurrentPositionTarget.HasValue)
+        {
+            var sqrMaxMovement = CurrentPositionTargetSpeed * CurrentPositionTargetSpeed;
+            var movementNeeded = CurrentPositionTarget.Value - transform.position;
+
+            if (movementNeeded.sqrMagnitude <= sqrMaxMovement)
+            {
+                transform.position = CurrentPositionTarget.Value;
+                CurrentPositionTarget = null;
+            }else
+            {
+                var scale = CurrentPositionTargetSpeed / movementNeeded.magnitude;
+                transform.position = new Vector3(transform.position.x + movementNeeded.x * scale, 
+                    transform.position.y + movementNeeded.y * scale, transform.position.z + movementNeeded.z * scale);
+            }
+        }
+
+        if(CurrentRotationTargetY.HasValue)
+        {
+            var maxMovement = CurrentRotationTargetSpeed;
+            var movementNeeded = CurrentRotationTargetY.Value - transform.rotation.y;
+            
+            if(movementNeeded <= maxMovement)
+            {
+                transform.rotation = new Quaternion(transform.rotation.x, CurrentRotationTargetY.Value, transform.rotation.z, transform.rotation.w);
+                CurrentRotationTargetY = null;
+            }else
+            {
+                var deltaMove = maxMovement;
+                if (movementNeeded < 0)
+                    deltaMove = -maxMovement;
+
+                transform.rotation = new Quaternion(
+                    transform.rotation.x,
+                    transform.rotation.y + deltaMove,
+                    transform.rotation.z,
+                    transform.rotation.w
+                    );
+            }
+        }
+
+        if(ShakeTimeRemaining > 0)
+        {
+            ShakeTimeRemaining -= Time.deltaTime;
+            
+            if(ShakePower <= 0)
+            {
+                Debug.LogWarning($"HealthBar ShakeTimeRemaining > 0 (is {ShakeTimeRemaining}) but ShakePower is non-positive (is {ShakePower}); this doesn't accomplish anything!");
+            }else
+            {
+                if(!CurrentPositionTarget.HasValue)
+                {
+                    var targetX = InitialPosition.x + ShakePower * Random.Range(-1f, 1f);
+                    var targetY = InitialPosition.y + ShakePower * Random.Range(-1f, 1f);
+
+                    CurrentPositionTargetSpeed = ShakePower * Random.Range(0.1f, 0.2f);
+                    CurrentPositionTarget = new Vector3(
+                        targetX, targetY, InitialPosition.z
+                        );
+                }
+
+                if(!CurrentRotationTargetY.HasValue)
+                {
+                    var targetY = InitialRotationY + ShakePower * Random.Range(-1f, 1f);
+
+                    CurrentPositionTargetSpeed = ShakePower * Random.Range(0.1f, 0.2f);
+                    CurrentRotationTargetY = targetY;
+                }
+            }
+        }else
+        {
+            if(!CurrentPositionTarget.HasValue)
+            {
+
+            }
         }
 	}
 
