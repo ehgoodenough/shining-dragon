@@ -29,12 +29,15 @@ public class Thug : MonoBehaviour {
 	private GameObject sweetSpotIndicator;
 	private GameObject sweetSpotIndicatorForeground;
 
+	public GameObject NiceMessage;
+	private GameObject niceMessage;
+
 	private float maxSweetSpot;
 	private float minSweetSpot;
 
 	private float stunPower = 0;
 
-	private float heroBufferXWidth = 0.4f;
+	private float heroBufferXWidth = 0.3f;
     
     private float timeSinceDead = 0f;
 	private float timeSinceAlive = 0f;
@@ -77,7 +80,7 @@ public class Thug : MonoBehaviour {
         } else if(this.state == "dead") {
             timeSinceDead += Time.deltaTime;
             if(timeSinceDead > 0.35) {
-                manager.createThug();
+				manager.createThug(this.stunPower);
                 this.state = "very dead";
             }
             return;
@@ -115,12 +118,16 @@ public class Thug : MonoBehaviour {
 			//Debug.Log (stunPower);
 
 		} else if (distanceFromHero < maxSweetSpot && distanceFromHero > minSweetSpot) {
-			stunPower = 1;
+			stunPower = 1f;
 			//Debug.Log (stunPower);
 
 		} else {
 			stunPower = 1 / ((distanceFromHero - (maxSweetSpot - 1))*(distanceFromHero - (maxSweetSpot - 1)));
 			//Debug.Log (stunPower);
+		}
+
+		if (stunPower > 0.9f) {
+			stunPower = 0.9f;
 		}
 
 		float currentXPos =  sweetSpotIndicatorForeground.transform.position.x;
@@ -132,6 +139,7 @@ public class Thug : MonoBehaviour {
 		if(distanceFromHero <= attackDistance) {
             if(manager.hasCompletedTutorial == false) {
                 Time.timeScale = 0.1f;
+                manager.tutorialMessage.text = "Hit SPACEBAR to attack!!";
             }
 			if (distanceFromHero <= minSweetSpot) {
 				if (this.state != "attacking") {
@@ -147,15 +155,29 @@ public class Thug : MonoBehaviour {
                 animator.Play("AttackIdle");
 				//Debug.Log (stunPower);
 				this.hero.beStunned (stunPower);
-				stunPower = 0;
+				//stunPower = 0;
+
+				if (stunPower > 0.85f) {
+
+					niceMessage = Instantiate (NiceMessage, sweetSpotIndicator.transform.position + new Vector3(-0.55f, 0.25f, 0), Quaternion.identity);
+					niceMessage.transform.parent = sweetSpotIndicator.transform;
+				}
                 
                 Time.timeScale = 1f;
                 manager.hasCompletedTutorial = true;
+                
+                if(manager.hasCompletedTutorial == false) {
+                    manager.tutorialMessage.text = "Now button-mash the SPACEBAR!!";
+                }
 			}
 
 			if (distanceFromHero <= minSweetSpot) {
 				if (this.state != "attacking") {
 					
+                    if(manager.hasCompletedTutorial == false) {
+                        manager.tutorialMessage.text = "Oh no!! Too late :(";
+                    }
+                    
 					sweetSpotIndicatorForeground.GetComponent<SpriteRenderer> ().color = new Color (1f, 0.2f, 0.2f, 1);
                     render.color = new Color(0.5f, 0.5f, 0.5f, 1f);
 				}
@@ -179,6 +201,13 @@ public class Thug : MonoBehaviour {
             combo++;
             source.PlayOneShot(attackSFXList[attackSfx]);
             animator.Play("Attack");
+            
+            if(combo > 4) {
+                if(manager.hasCompletedTutorial == false) {
+                    manager.hasCompletedTutorial = true;
+                    manager.tutorialMessage.text = "";
+                }
+            }
         }
     }
     
@@ -206,4 +235,8 @@ public class Thug : MonoBehaviour {
         render.sortingOrder -= 1;
         render.color = new Color(255, 255, 255, 1);
     }
+
+	public void modifySpeed(float speedModifier) {
+		this.speed = this.speed * 0.8f + (this.speed * 0.6f * speedModifier);
+	}
 }

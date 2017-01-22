@@ -14,6 +14,7 @@ public class SceneManager : MonoBehaviour {
     private Hero hero;
     public HealthBar healthbar;
     public Text endMessage;
+    public Text tutorialMessage;
     public const float restartTime = 3000;
     
     public bool gameHasEnded = false;
@@ -27,11 +28,13 @@ public class SceneManager : MonoBehaviour {
         this.Thug = Resources.Load("OniThug") as GameObject;
 
         this.createHero();
-        this.createThug();
+        this.createThug(0);
 
         if (GameObject.Find("HealthBar")) {
             this.healthbar = GameObject.Find("HealthBar").GetComponent<HealthBar>();
         }
+        
+        tutorialMessage = GameObject.Find("TutorialMessage").GetComponent<Text>();
 
         endMessage.text = "";
     }
@@ -68,9 +71,10 @@ public class SceneManager : MonoBehaviour {
         Application.LoadLevel(Application.loadedLevel);
     }
 
-    public Thug createThug() {
+	public Thug createThug(float stunPower) {
 		this.thug = Object.Instantiate(Thug, new Vector2(6f + this.hero.transform.position.x, -0.5f), Quaternion.identity).GetComponent<Thug>();
         this.thug.gameObject.name = "Thug" + Random.Range(100, 999);
+		this.thug.modifySpeed (stunPower);
         return this.thug;
     }
 
