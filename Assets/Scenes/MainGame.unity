@@ -200,6 +200,46 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114837599439926266, guid: 34e3e59d9c008b84cbf3fbb58d824b3e,
+        type: 2}
+      propertyPath: SHAKE_POWER_MULTIPLIER_SCORE
+      value: 0.002
+      objectReference: {fileID: 0}
+    - target: {fileID: 114837599439926266, guid: 34e3e59d9c008b84cbf3fbb58d824b3e,
+        type: 2}
+      propertyPath: SHAKE_TIME_MULTIPLIER_SCORE
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 114837599439926266, guid: 34e3e59d9c008b84cbf3fbb58d824b3e,
+        type: 2}
+      propertyPath: SHAKE_POWER_ROTATION_MULTIPLIER
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114837599439926266, guid: 34e3e59d9c008b84cbf3fbb58d824b3e,
+        type: 2}
+      propertyPath: SHAKE_POWER_POSITION_MULTIPLIER
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114837599439926266, guid: 34e3e59d9c008b84cbf3fbb58d824b3e,
+        type: 2}
+      propertyPath: ShakePowerMultiplierScore
+      value: 0.002
+      objectReference: {fileID: 0}
+    - target: {fileID: 114837599439926266, guid: 34e3e59d9c008b84cbf3fbb58d824b3e,
+        type: 2}
+      propertyPath: ShakeTimeMultiplierScore
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 114837599439926266, guid: 34e3e59d9c008b84cbf3fbb58d824b3e,
+        type: 2}
+      propertyPath: ShakePowerPositionMultiplier
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114837599439926266, guid: 34e3e59d9c008b84cbf3fbb58d824b3e,
+        type: 2}
+      propertyPath: ShakePowerRotationMultiplier
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 34e3e59d9c008b84cbf3fbb58d824b3e, type: 2}
   m_IsPrefabParent: 0
