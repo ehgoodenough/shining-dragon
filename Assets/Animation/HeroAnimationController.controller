@@ -118,7 +118,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: HeroWalk
-  m_Speed: 0.4
+  m_Speed: 0.5
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -164,7 +164,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Attack
-  m_Speed: 0.5
+  m_Speed: 0.6
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101415814364289366}
@@ -176,7 +176,7 @@ AnimatorState:
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 8544b9929d0ee9641ab34857003fa7ce, type: 2}
+  m_Motion: {fileID: 7400000, guid: 50daeae282f805a45a5a56f5791814ea, type: 2}
   m_Tag: attack
   m_SpeedParameter: 
   m_MirrorParameter: 
