@@ -29,27 +29,33 @@ public class HealthBar : MonoBehaviour {
     public float ShakeTimeRemaining;
     public float ShakePower;
 
-    private Vector3 InitialPosition;
+    private Vector3 InitialPLocalosition;
     private Vector3? CurrentPositionTarget;
     private float CurrentPositionTargetSpeed;
     private bool PositionAtInitial;
 
 
-    private float InitialRotationY;
-    private float? CurrentRotationTargetY;
+    private float InitialLocalRotationZ;
+    private float? CurrentRotationTargetZ;
     private float CurrentRotationTargetSpeed;
     private bool RotationAtInitial;
 
-	// Use this for initialization
-	void Start () {
+    private GameObject HPContainer;
+
+    public const float SHAKE_POWER_MULTIPLIER_SCORE = 0.002f;
+    public const float SHAKE_TIME_MULTIPLIER_SCORE = 0.01f;
+
+    // Use this for initialization
+    void Start () {
+        HPContainer = GameObject.Find("HealthBarOverlay");
         LiveGlowEffects = new List<GlowEffect>();
 
         ShakeTimeRemaining = 0;
         ShakePower = 0;
-        InitialPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-        InitialRotationY = transform.rotation.y;
+        InitialPLocalosition = new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z);
+        InitialLocalRotationZ = transform.localRotation.z;
         CurrentPositionTarget = null;
-        CurrentRotationTargetY = null;
+        CurrentRotationTargetZ = null;
 
         PositionAtInitial = true;
         RotationAtInitial = true;
@@ -68,6 +74,18 @@ public class HealthBar : MonoBehaviour {
         _Sprite.enabled = false;
     }
 
+    void SetLocalPos(Vector3 localPos)
+    {
+        transform.localPosition = localPos;
+        HPContainer.transform.localPosition = localPos;
+    }
+
+    void SetLocalRot(Quaternion rot)
+    {
+        transform.localRotation = rot;
+        HPContainer.transform.localRotation = rot;
+    }
+
     // Update is called once per frame
     void Update () {
         if(DebugHealthBar)
@@ -75,44 +93,46 @@ public class HealthBar : MonoBehaviour {
             ImplUpdateWidth(DebugForcedHealth, DebugForcedHealthMax);
         }
 
+        ShakePower *= 0.9f;
+
         if(CurrentPositionTarget.HasValue)
         {
             var sqrMaxMovement = CurrentPositionTargetSpeed * CurrentPositionTargetSpeed;
-            var movementNeeded = CurrentPositionTarget.Value - transform.position;
+            var movementNeeded = CurrentPositionTarget.Value - transform.localPosition;
 
             if (movementNeeded.sqrMagnitude <= sqrMaxMovement)
             {
-                transform.position = CurrentPositionTarget.Value;
+                SetLocalPos(CurrentPositionTarget.Value);
                 CurrentPositionTarget = null;
             }else
             {
                 var scale = CurrentPositionTargetSpeed / movementNeeded.magnitude;
-                transform.position = new Vector3(transform.position.x + movementNeeded.x * scale, 
-                    transform.position.y + movementNeeded.y * scale, transform.position.z + movementNeeded.z * scale);
+                SetLocalPos(new Vector3(transform.localPosition.x + movementNeeded.x * scale,
+                    transform.localPosition.y + movementNeeded.y * scale, transform.localPosition.z + movementNeeded.z * scale));
             }
         }
 
-        if(CurrentRotationTargetY.HasValue)
+        if(CurrentRotationTargetZ.HasValue)
         {
             var maxMovement = CurrentRotationTargetSpeed;
-            var movementNeeded = CurrentRotationTargetY.Value - transform.rotation.y;
+            var movementNeeded = CurrentRotationTargetZ.Value - transform.localRotation.z;
             
             if(movementNeeded <= maxMovement)
             {
-                transform.rotation = new Quaternion(transform.rotation.x, CurrentRotationTargetY.Value, transform.rotation.z, transform.rotation.w);
-                CurrentRotationTargetY = null;
+                SetLocalRot(new Quaternion(transform.localRotation.x, transform.localRotation.y, CurrentRotationTargetZ.Value, transform.localRotation.w));
+                CurrentRotationTargetZ = null;
             }else
             {
                 var deltaMove = maxMovement;
                 if (movementNeeded < 0)
                     deltaMove = -maxMovement;
 
-                transform.rotation = new Quaternion(
-                    transform.rotation.x,
-                    transform.rotation.y + deltaMove,
-                    transform.rotation.z,
-                    transform.rotation.w
-                    );
+                SetLocalRot(new Quaternion(
+                    transform.localRotation.x,
+                    transform.localRotation.y,
+                    transform.localRotation.z + deltaMove,
+                    transform.localRotation.w
+                    ));
             }
         }
 
@@ -127,28 +147,41 @@ public class HealthBar : MonoBehaviour {
             {
                 if(!CurrentPositionTarget.HasValue)
                 {
-                    var targetX = InitialPosition.x + ShakePower * Random.Range(-1f, 1f);
-                    var targetY = InitialPosition.y + ShakePower * Random.Range(-1f, 1f);
+                    var targetX = InitialPLocalosition.x + ShakePower * Random.Range(-5f, 5f);
+                    var targetY = InitialPLocalosition.y + ShakePower * Random.Range(-5f, 5f);
 
-                    CurrentPositionTargetSpeed = ShakePower * Random.Range(0.1f, 0.2f);
+                    CurrentPositionTargetSpeed = ShakePower * Random.Range(1f, 2f);
                     CurrentPositionTarget = new Vector3(
-                        targetX, targetY, InitialPosition.z
+                        targetX, targetY, InitialPLocalosition.z
                         );
+                    PositionAtInitial = false;
+
+                    Debug.Log($"going to {targetX}, {targetY}");
                 }
 
-                if(!CurrentRotationTargetY.HasValue)
+                if(!CurrentRotationTargetZ.HasValue)
                 {
-                    var targetY = InitialRotationY + ShakePower * Random.Range(-1f, 1f);
+                    var targetZ = InitialLocalRotationZ + ShakePower * Random.Range(-3f, 3f);
 
-                    CurrentPositionTargetSpeed = ShakePower * Random.Range(0.1f, 0.2f);
-                    CurrentRotationTargetY = targetY;
+                    CurrentRotationTargetSpeed = ShakePower * Random.Range(1f, 2f);
+                    CurrentRotationTargetZ = targetZ;
+                    RotationAtInitial = false;
                 }
             }
         }else
         {
-            if(!CurrentPositionTarget.HasValue)
+            if(!CurrentPositionTarget.HasValue && !PositionAtInitial)
             {
+                CurrentPositionTarget = new Vector3(InitialPLocalosition.x, InitialPLocalosition.y, InitialPLocalosition.z);
+                CurrentPositionTargetSpeed = 1;
+                PositionAtInitial = true;
+            }
 
+            if(!CurrentRotationTargetZ.HasValue && !RotationAtInitial)
+            {
+                CurrentRotationTargetZ = InitialLocalRotationZ;
+                CurrentRotationTargetSpeed = 1;
+                RotationAtInitial = true;
             }
         }
 	}
@@ -202,7 +235,11 @@ public class HealthBar : MonoBehaviour {
         if (lostHealth < 0)
             lostHealth = 0;
 
-        for(int i = health; i < maxHealth; i++)
+        float score = lostHealth;
+        if (LiveGlowEffects.Count > 0)
+            score += LiveGlowEffects[LiveGlowEffects.Count - 1].ComboMultiplier * 1.1f;
+
+        for (int i = health; i < maxHealth; i++)
         {
             var pipe = Pipes[i];
             var sprite = pipe.GetComponent<SpriteRenderer>();
@@ -213,17 +250,17 @@ public class HealthBar : MonoBehaviour {
             if(justDied)
             {
                 var glowEffectObj = Instantiate(HPBarGlowEffectPreFab);
+                glowEffectObj.transform.SetParent(transform, false);
                 glowEffectObj.transform.position = new Vector3(pipe.transform.position.x, pipe.transform.position.y, pipe.transform.position.z);
-                glowEffectObj.transform.parent = transform;
                 var glowEffect = glowEffectObj.GetComponent<GlowEffect>();
-                float score = lostHealth;
-                if (LiveGlowEffects.Count > 0)
-                    score += LiveGlowEffects[LiveGlowEffects.Count - 1].ComboMultiplier * 1.1f;
                 
                 glowEffect.ComboMultiplier = score;
                 LiveGlowEffects.Add(glowEffect);
             }
         }
+
+        ShakePower += score * SHAKE_POWER_MULTIPLIER_SCORE;
+        ShakeTimeRemaining += score * SHAKE_TIME_MULTIPLIER_SCORE;
 
         LastHealth = health;
     }
@@ -232,7 +269,7 @@ public class HealthBar : MonoBehaviour {
     {
         var glowEffectGameObj = Instantiate(HPBarGlowEffectPreFab, position, Quaternion.identity);
         glowEffectGameObj.name = $"Glow Effect {position.x}";
-        glowEffectGameObj.transform.SetParent(HealthBarHolder.transform , true);
+        glowEffectGameObj.transform.SetParent(HealthBarHolder.transform , false);
 
         var rectTrans = glowEffectGameObj.GetComponent<RectTransform>();
         rectTrans.sizeDelta = new Vector2(width, rectTrans.sizeDelta.y);
@@ -248,6 +285,7 @@ public class HealthBar : MonoBehaviour {
         {
             BestScore = score;
         }
+
 
         LiveGlowEffects.Add(glowEffect);
     }
