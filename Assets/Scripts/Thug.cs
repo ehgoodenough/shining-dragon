@@ -259,7 +259,8 @@ public class Thug : MonoBehaviour {
         animator.Play("Death");
         
 		sweetSpotIndicator.SetActive (false);
-        source.volume = 0.5f;
+        source.volume = 0.75f;
+        source.pitch = 1f;
         source.PlayOneShot(flySFXList[flySFX]);
         
 
