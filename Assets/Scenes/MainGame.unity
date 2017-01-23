@@ -357,16 +357,32 @@ Prefab:
     - target: {fileID: 82779416871797002, guid: 3405384dc1c0f4c07865c4d29a92da1c,
         type: 2}
       propertyPath: Mute
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114017551495894254, guid: 3405384dc1c0f4c07865c4d29a92da1c,
         type: 2}
       propertyPath: hasCompletedTutorial
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114017551495894254, guid: 3405384dc1c0f4c07865c4d29a92da1c,
+        type: 2}
+      propertyPath: tutorialMessage
+      value: 
+      objectReference: {fileID: 481150925}
+    - target: {fileID: 114017551495894254, guid: 3405384dc1c0f4c07865c4d29a92da1c,
+        type: 2}
+      propertyPath: comboMessage
+      value: 
+      objectReference: {fileID: 1329928398}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3405384dc1c0f4c07865c4d29a92da1c, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &481150925 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114998896605171090, guid: c0730747a19a1469bbcfb7c8bb8df205,
+    type: 2}
+  m_PrefabInternal: {fileID: 1665281629}
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1001 &582815757
 Prefab:
   m_ObjectHideFlags: 0
@@ -507,6 +523,12 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1665281629}
   m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+--- !u!114 &1329928398 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114732215220588210, guid: c0730747a19a1469bbcfb7c8bb8df205,
+    type: 2}
+  m_PrefabInternal: {fileID: 1665281629}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!4 &1405368153 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4341207160247096, guid: 038df5b73c85756428f8f38480519e13,
