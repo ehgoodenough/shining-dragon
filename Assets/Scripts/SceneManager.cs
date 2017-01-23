@@ -41,9 +41,12 @@ public class SceneManager : MonoBehaviour {
         }
         
         tutorialMessage = GameObject.Find("TutorialMessage").GetComponent<Text>();
+
         comboMessage = GameObject.Find("ComboMessage").GetComponent<Text>();
 
+
         endMessage.text = "";
+
     }
 
     public Hero getHero() {
