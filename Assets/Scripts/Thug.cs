@@ -90,7 +90,7 @@ public class Thug : MonoBehaviour {
             timeSinceDead += Time.deltaTime;
             if(timeSinceDead > 0.35) {
 				manager.createThug(this.stunPower);
-                this.state = "very dead";
+                this.state = "very dead"; 
             }
             return;
         } else if(this.state == "very dead") {
@@ -209,6 +209,12 @@ public class Thug : MonoBehaviour {
         }
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        source.PlayOneShot(hitGroundSFX);
+        print("collide");
+    }
+
     private void Attacking() {
 
         if(Input.GetButtonDown("Action")) {
@@ -253,8 +259,9 @@ public class Thug : MonoBehaviour {
         animator.Play("Death");
         
 		sweetSpotIndicator.SetActive (false);
-
+        source.volume = 0.5f;
         source.PlayOneShot(flySFXList[flySFX]);
+        
 
         // Send the thug flying!
         GetComponent<CapsuleCollider2D>().isTrigger = false;
