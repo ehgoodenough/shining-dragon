@@ -19,6 +19,7 @@ public class SceneManager : MonoBehaviour {
     public const float restartTime = 3000;
     
     public bool gameHasEnded = false;
+    public bool gameHasStarted = false;
     
     public bool hasCompletedTutorial = false;
 
@@ -28,11 +29,15 @@ public class SceneManager : MonoBehaviour {
         this.Hero = Resources.Load("MonkHero") as GameObject;
         this.Thug = Resources.Load("OniThug") as GameObject;
 
-        this.createHero();
-        this.createThug(0);
-
         if (GameObject.Find("HealthBar")) {
             this.healthbar = GameObject.Find("HealthBar").GetComponent<HealthBar>();
+        }
+        
+        if(GameObject.Find("Title") == null) {
+            this.gameHasStarted = true;
+            
+            this.createHero();
+            this.createThug(0);
         }
         
         tutorialMessage = GameObject.Find("TutorialMessage").GetComponent<Text>();
@@ -92,8 +97,17 @@ public class SceneManager : MonoBehaviour {
 
     void Update()
     {
-       Vector3 cameraMovement = new Vector3(0f, 0f, 0f);
-       cameraMovement.x = (thug.transform.position.x - 1f - Camera.main.transform.position.x) / 16;
-       Camera.main.transform.Translate(cameraMovement);
+        if(this.gameHasStarted == false) {
+            if(Input.GetButtonDown("Action")) {
+                this.gameHasStarted = true;
+                
+                this.createHero();
+                this.createThug(0);
+            }
+        } else {
+            Vector3 cameraMovement = new Vector3(0f, 0f, 0f);
+            cameraMovement.x = (thug.transform.position.x - 1f - Camera.main.transform.position.x) / 16;
+            Camera.main.transform.Translate(cameraMovement);
+        }
     }
 }
