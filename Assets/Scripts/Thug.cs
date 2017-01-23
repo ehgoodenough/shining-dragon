@@ -54,6 +54,9 @@ public class Thug : MonoBehaviour {
     private const float PITCH_CHANGE = 0.3f;
 
     private int attackSfx = 0;
+
+	private float messageLifespan;
+	private float messageTimeAlive;
     
 
 	private void Start() {
@@ -77,6 +80,9 @@ public class Thug : MonoBehaviour {
 
 		sweetSpotIndicator.SetActive (false);
         render = GetComponent<SpriteRenderer>();
+
+		messageLifespan = 1f;
+		messageTimeAlive = 0;
     }
 
     private void Update() {
@@ -105,6 +111,27 @@ public class Thug : MonoBehaviour {
 
 		if (timeSinceAlive > 0.6f) {
 			sweetSpotIndicator.SetActive (true);
+		}
+			
+		if (mehMessage != null) {
+			messageTimeAlive += Time.deltaTime;
+			if (messageTimeAlive > messageLifespan) {
+				Debug.Log ("got here");
+
+				Destroy (mehMessage);
+			}
+		}
+		if (goodMessage != null) {
+			messageTimeAlive += Time.deltaTime;
+			if (messageTimeAlive > messageLifespan) {
+				Destroy (goodMessage);
+			}
+		}
+		if (niceMessage != null) {
+			messageTimeAlive += Time.deltaTime;
+			if (messageTimeAlive > messageLifespan) {
+				Destroy (niceMessage);
+			}
 		}
     }
 
@@ -179,6 +206,8 @@ public class Thug : MonoBehaviour {
 					mehMessage = Instantiate (MehMessage, sweetSpotIndicator.transform.position + new Vector3 (-0.55f, 0.3f, 0), Quaternion.identity);
 					mehMessage.transform.parent = sweetSpotIndicator.transform;
 				}
+
+				messageTimeAlive = 0;
                 
                 Time.timeScale = 1f;
                 
