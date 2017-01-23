@@ -151,5 +151,8 @@ public class Hero : MonoBehaviour {
         source.PlayOneShot(VOSFXList[VOSFX]);
         Time.timeScale = 1f;
         manager.tutorialMessage.text = "";
+
+		animator.Play("HeroWalk");
+
 	}
 }
