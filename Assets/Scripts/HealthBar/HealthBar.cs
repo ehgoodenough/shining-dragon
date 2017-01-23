@@ -42,9 +42,11 @@ public class HealthBar : MonoBehaviour {
 
     private GameObject HPContainer;
 
-    public const float SHAKE_POWER_MULTIPLIER_SCORE = 0.002f;
-    public const float SHAKE_TIME_MULTIPLIER_SCORE = 0.01f;
+    public float ShakePowerMultiplierScore;
+    public float ShakeTimeMultiplierScore;
 
+    public float ShakePowerPositionMultiplier;
+    public float ShakePowerRotationMultiplier;
     // Use this for initialization
     void Start () {
         HPContainer = GameObject.Find("HealthBarOverlay");
@@ -147,21 +149,19 @@ public class HealthBar : MonoBehaviour {
             {
                 if(!CurrentPositionTarget.HasValue)
                 {
-                    var targetX = InitialPLocalosition.x + ShakePower * Random.Range(-5f, 5f);
-                    var targetY = InitialPLocalosition.y + ShakePower * Random.Range(-5f, 5f);
+                    var targetX = InitialPLocalosition.x + ShakePower * Random.Range(-ShakePowerPositionMultiplier, ShakePowerPositionMultiplier);
+                    var targetY = InitialPLocalosition.y + ShakePower * Random.Range(-ShakePowerPositionMultiplier, ShakePowerPositionMultiplier);
 
                     CurrentPositionTargetSpeed = ShakePower * Random.Range(1f, 2f);
                     CurrentPositionTarget = new Vector3(
                         targetX, targetY, InitialPLocalosition.z
                         );
                     PositionAtInitial = false;
-
-                    Debug.Log($"going to {targetX}, {targetY}");
                 }
 
                 if(!CurrentRotationTargetZ.HasValue)
                 {
-                    var targetZ = InitialLocalRotationZ + ShakePower * Random.Range(-3f, 3f);
+                    var targetZ = InitialLocalRotationZ + ShakePower * Random.Range(-ShakePowerRotationMultiplier, ShakePowerRotationMultiplier);
 
                     CurrentRotationTargetSpeed = ShakePower * Random.Range(1f, 2f);
                     CurrentRotationTargetZ = targetZ;
@@ -259,8 +259,8 @@ public class HealthBar : MonoBehaviour {
             }
         }
 
-        ShakePower += score * SHAKE_POWER_MULTIPLIER_SCORE;
-        ShakeTimeRemaining += score * SHAKE_TIME_MULTIPLIER_SCORE;
+        ShakePower += score * ShakePowerMultiplierScore;
+        ShakeTimeRemaining += score * ShakeTimeMultiplierScore;
 
         LastHealth = health;
     }
