@@ -173,7 +173,7 @@ MonoBehaviour:
   runSFX: []
   screamSFX: {fileID: 0}
   stunAttackSFX: {fileID: 0}
-  hitGroundSFX: {fileID: 0}
+  hitGroundSFX: {fileID: 8300000, guid: a9c6c4b5fdf331f4089e5bfeb900d365, type: 3}
   flySFXList:
   - {fileID: 8300000, guid: 849c4169f19e086419afc7049c7a451c, type: 3}
   - {fileID: 8300000, guid: adcbbdde231c1ca4e85e3e23af8beca1, type: 3}
